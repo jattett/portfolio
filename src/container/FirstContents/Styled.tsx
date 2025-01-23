@@ -33,7 +33,7 @@ const blink = keyframes`
 const Styled = styled.div`
   width: 100vw;
   height: 100vh;
-  background: var(--white-color);
+  background-color: var(--black-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,6 +43,9 @@ const Styled = styled.div`
     animation: ${LeftOpacity} 4s;
     opacity: 0;
     font-weight: 700;
+    color: #39ff14;
+    font-family: 'Bebas Neue', serif;
+    text-shadow: 0 0 0px #39ff14, 0 0 17px #39ff14, 0 0 0px #39ff14, 0 0 8px #39ff14, 0 0 30px #32cd32, 0 0 6px #228b22;
     &.first {
       left: 10%;
       top: 30%;
@@ -67,6 +70,9 @@ const Styled = styled.div`
     animation: ${RightOpacity} 3s;
     opacity: 0;
     font-weight: 700;
+    color: #39ff14;
+    font-family: 'Bebas Neue', serif;
+    text-shadow: 0 0 0px #39ff14, 0 0 17px #39ff14, 0 0 0px #39ff14, 0 0 8px #39ff14, 0 0 30px #32cd32, 0 0 6px #228b22;
     &.first {
       right: 10%;
       bottom: 30%;
@@ -90,8 +96,10 @@ const Styled = styled.div`
     font-weight: 700;
     text-align: center;
     overflow: hidden;
-    color: var(--green-color);
+    color: #39ff14;
     font-family: 'Bebas Neue', serif;
+    text-shadow: 0 0 0px #39ff14, 0 0 17px #39ff14, 0 0 0px #39ff14, 0 0 8px #39ff14, 0 0 30px #32cd32, 0 0 6px #228b22;
+    padding: 40px;
 
     &::after {
       content: '_';
