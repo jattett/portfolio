@@ -2,6 +2,8 @@ import Header from '../../components/header';
 import Styled from './Styled';
 import FirstContents from '../FirstContents';
 import Info from '../Info';
+import Skill from '../Skill';
+import Project from '../Project';
 import ReactFullpage from '@fullpage/react-fullpage';
 
 function Main() {
@@ -20,6 +22,12 @@ function Main() {
             </div>
             <div className="section">
               <Info />
+            </div>
+            <div className="section">
+              <Skill />
+            </div>
+            <div className="section">
+              <Project />
             </div>
           </ReactFullpage.Wrapper>
         )}

@@ -12,6 +12,24 @@ const bgGradient = keyframes`
   }
 `;
 
+const fadeInfinity = keyframes`
+  0% {
+    opacity: 0;
+  }
+  15% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+`;
+
 interface HeaderStyledProps {
   isScrolled: boolean;
 }
@@ -30,7 +48,7 @@ const HeaderStyled = styled.div<HeaderStyledProps>`
     justify-content: space-between;
     align-items: center;
     padding: 30px 40px;
-    background-color: var(--white-color);
+    background-color: var(--black-color);
     h1 {
       font-family: 'Jersey 15', serif;
       animation: ${bgGradient} 5s linear infinite;
@@ -66,12 +84,17 @@ const HeaderStyled = styled.div<HeaderStyledProps>`
           position: relative;
           cursor: pointer;
           transition: 0.3s ease-in;
+          color: #39ff14;
+          font-family: 'Bebas Neue', serif;
+          text-shadow: 0 0 0px #39ff14, 0 0 17px #39ff14, 0 0 0px #39ff14, 0 0 8px #39ff14, 0 0 30px #32cd32,
+            0 0 6px #228b22;
           &::before {
             content: '';
             width: 0%;
             transition: 0.3s ease-in;
           }
           &:hover {
+            animation: ${fadeInfinity} 0.8s;
             color: var(--green-color);
             &::before {
               content: '';
@@ -79,7 +102,8 @@ const HeaderStyled = styled.div<HeaderStyledProps>`
               height: 3px;
               position: absolute;
               bottom: -35px;
-              background-color: var(--green-color);
+              background-color: #39ff14;
+              box-shadow: 0 0 0px #39ff14, 0 0 17px #39ff14, 0 0 0px #39ff14, 0 0 8px #39ff14, 0 0 30px #32cd32;
             }
           }
         }

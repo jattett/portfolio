@@ -64,15 +64,32 @@ const GlobalStyle = createGlobalStyle`
   --skyblue-color: #00c6fb;
   --blue-color: #1976d2;
   --white-color: #ffffff;
-  --black-color: #000000;
+  --black-color: #1c1c1c;
   --gray-color: #cdcdcd;
   --green-color: #44c489;
   } 
+
+
+
   
   /* Google Fonts import */
   @import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+
+  
+.fp-nav {
+  ul {
+    li {
+      a {
+        span {
+          background-color: #39ff14;
+        }
+      }
+    }
+  }
+}
 
 `;
 
