@@ -1,4 +1,3 @@
-import React from 'react';
 import { Styled, NeonBorder } from './Styled';
 import Profile from '../../assets/react.svg';
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { StyledSlider, Styled, Modal } from './Styled';
 
 // 슬라이더 데이터

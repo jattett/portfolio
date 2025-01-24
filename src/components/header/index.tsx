@@ -13,10 +13,12 @@ const Header: React.FC<HeaderProps> = ({ fullpageApi }) => {
 
   // 네비게이션 클릭 핸들러
   const handleNavigation = (section: string) => {
-    setActiveSection(section);
     if (fullpageApi) {
-      fullpageApi.moveTo(section);
+      fullpageApi.moveTo(section); // 섹션 이동
+    } else {
+      console.warn('fullpageApi is not available.'); // 디버깅용 경고
     }
+    setActiveSection(section); // 상태 업데이트
   };
 
   return (
@@ -25,21 +27,17 @@ const Header: React.FC<HeaderProps> = ({ fullpageApi }) => {
         <h1>DEV.GYUMIN</h1>
         <nav>
           <ul>
-            <li className={activeSection === 'first' ? 'active' : ''} onClick={() => handleNavigation('first')}>
-              MAIN
-            </li>
-            <li className={activeSection === 'info' ? 'active' : ''} onClick={() => handleNavigation('info')}>
-              INFO
-            </li>
-            <li className={activeSection === 'Skill' ? 'active' : ''} onClick={() => handleNavigation('Skill')}>
-              SKILL
-            </li>
-            <li className={activeSection === 'Project' ? 'active' : ''} onClick={() => handleNavigation('Project')}>
-              PROJECT
-            </li>
-            <li className={activeSection === 'Timeline' ? 'active' : ''} onClick={() => handleNavigation('Timeline')}>
-              TIMELINE
-            </li>
+            {[
+              { id: 'first', label: 'MAIN' },
+              { id: 'info', label: 'INFO' },
+              { id: 'Skill', label: 'SKILL' },
+              { id: 'Project', label: 'PROJECT' },
+              { id: 'Timeline', label: 'TIMELINE' },
+            ].map(({ id, label }) => (
+              <li key={id} className={activeSection === id ? 'active' : ''} onClick={() => handleNavigation(id)}>
+                {label}
+              </li>
+            ))}
           </ul>
         </nav>
       </div>
