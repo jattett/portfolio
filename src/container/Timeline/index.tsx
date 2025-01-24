@@ -1,44 +1,44 @@
 import React from 'react';
 import Styled from './Styled';
-import reactLogo from '../../assets/react.svg'; // 예: React 로고 이미지
-import htmlLogo from '../../assets/html.svg'; // 예: HTML 로고 이미지
-import cssLogo from '../../assets/css.png'; // 예: HTML 로고 이미지
-import styledLogo from '../../assets/styled-components.svg'; // 예: Styled-Components 로고 이미지
-import jsLogo from '../../assets/javascript.svg'; // 예: JavaScript 로고 이미지
-import tsLogo from '../../assets/typescript.svg'; // 예: TypeScript 로고 이미지
 
-function Skill() {
-  const skills = [
-    { name: 'React', level: 80, image: reactLogo },
-    { name: 'HTML', level: 95, image: htmlLogo },
-    { name: 'CSS', level: 70, image: cssLogo },
-    { name: 'CSS/Styled-Component', level: 95, image: styledLogo },
-    { name: 'JavaScript', level: 80, image: jsLogo },
-    { name: 'TypeScript', level: 70, image: tsLogo },
+function Timeline() {
+  const timelineData = [
+    {
+      date: '2023.03 ~ 2023.09',
+      title: '리비에라 소프트(퍼블리셔)',
+      description: '웹 퍼블리셔로서 .',
+    },
+    {
+      date: '2023.09 ~ 2024.04',
+      title: 'First Freelance Project',
+      description:
+        '모 기업의 투자를 받아, 이전 회사의 사업자가 변경되었습니다. 이는 사실상 두 회사가 동일한 회사입니다.',
+    },
+    {
+      date: '2024.04',
+      title: '(주)클러쉬',
+      description: 'Worked as a frontend developer focusing on user experience.',
+    },
   ];
 
   return (
     <Styled>
-      <div className="skill-wrapper">
-        <h1>My Skills</h1>
-        {skills.map((skill, index) => (
-          <div key={index} className="skill-bar">
-            <div className="label">
-              {/* 이미지 추가 */}
-              <span className="skill-title">
-                {skill.name}
-                <img src={skill.image} alt={`${skill.name} logo`} className="skill-icon" />
-              </span>
-              <span>{skill.level}%</span>
+      <div className="timeline-container">
+        <h1 className="timeline-title">My Timeline</h1>
+        <div className="timeline">
+          {timelineData.map((item, index) => (
+            <div key={index} className="timeline-item">
+              <div className="timeline-date">{item.date}</div>
+              <div className="timeline-content">
+                <h2>{item.title}</h2>
+                <p>{item.description}</p>
+              </div>
             </div>
-            <div className="bar-container">
-              <div className="bar" style={{ width: `${skill.level}%`, transition: 'width 0.5s ease' }}></div>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </Styled>
   );
 }
 
-export default Skill;
+export default Timeline;

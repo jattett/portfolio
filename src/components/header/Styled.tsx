@@ -30,11 +30,7 @@ const fadeInfinity = keyframes`
   }
 `;
 
-interface HeaderStyledProps {
-  isScrolled: boolean;
-}
-
-const HeaderStyled = styled.div<HeaderStyledProps>`
+const HeaderStyled = styled.div`
   width: 100%;
   height: 100%;
   max-height: 70px;
@@ -42,7 +38,7 @@ const HeaderStyled = styled.div<HeaderStyledProps>`
   z-index: 1;
   box-shadow: -1px 9px 8px 4px rgba(0, 0, 0, 0.4);
   transition: 0.5s ease-in-out;
-  opacity: ${(props) => (props.isScrolled ? '0' : '1')};
+  opacity: 1;
   .header {
     display: flex;
     justify-content: space-between;

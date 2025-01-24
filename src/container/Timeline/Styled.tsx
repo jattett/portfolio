@@ -1,17 +1,4 @@
-import styled, { keyframes } from 'styled-components';
-
-// Keyframes for pulsating box-shadow
-const pulseBoxShadow = keyframes`
-  0% {
-    box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
-  }
-  50% {
-    box-shadow: 0 0 20px #39ff14, 0 0 40px #39ff14, 0 0 60px #39ff14;
-  }
-  100% {
-    box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
-  }
-`;
+import styled from 'styled-components';
 
 const Styled = styled.div`
   width: 100vw;
@@ -21,68 +8,83 @@ const Styled = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10vh;
-
-  .skill-wrapper {
-    box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    overflow: hidden;
-    position: relative;
-    background-color: #000;
+  .timeline-container {
+    padding: 50px;
     width: 80vw;
-    min-height: 40vh;
-    padding: 30px 40px;
-    grid-template-columns: 1.5fr 0.5fr;
-    gap: 40px;
-    animation: ${pulseBoxShadow} 2s infinite;
+    margin: 0 auto;
+    background-color: var(--black-color);
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14;
 
-    h1 {
-      color: #39ff14;
+    .timeline-title {
       text-align: center;
-      text-shadow: 0 0 0px #39ff14, 0 0 17px #39ff14, 0 0 0px #39ff14, 0 0 8px #39ff14, 0 0 30px #32cd32,
-        0 0 6px #228b22;
-      font-size: var(--font-lg);
+      color: #39ff14;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14;
     }
 
-    .skill-bar {
-      margin-bottom: 20px;
-      width: 100%;
+    .timeline {
+      position: relative;
+      margin: 0;
+      padding: 0;
+      list-style: none;
 
-      .label {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 5px;
-        font-size: 1rem;
-        color: #39ff14;
-        text-shadow: 0 0 0px #39ff14, 0 0 17px #39ff14, 0 0 0px #39ff14, 0 0 8px #39ff14, 0 0 30px #32cd32,
-          0 0 6px #228b22;
-        .skill-title {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-          img {
-            width: 30px;
-            height: 30px;
-          }
-        }
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 100%;
+        background: #39ff14;
       }
 
-      .bar-container {
-        background: #333;
-        border-radius: 10px;
-        overflow: hidden;
-        height: 20px;
+      .timeline-item {
+        position: relative;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: 50px;
 
-        .bar {
-          height: 100%;
-          background: linear-gradient(90deg, #00ff00, #00cc00);
-          box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
+        &:nth-child(even) {
+          justify-content: flex-end;
+        }
+
+        .timeline-date {
+          position: absolute;
+          top: 0;
+          left: calc(50% - 2px);
+          transform: translateX(-50%);
+          background-color: #000;
+          color: #39ff14;
+          padding: 5px 10px;
+          font-size: 1rem;
+          border-radius: 5px;
+          z-index: 1;
+        }
+
+        .timeline-content {
+          background-color: #1a1a1a;
+          color: white;
           border-radius: 10px;
+          padding: 20px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+          max-width: 300px;
+          z-index: 2;
+
+          h2 {
+            font-size: 1.5rem;
+            color: #39ff14;
+            margin-bottom: 10px;
+          }
+
+          p {
+            font-size: 1rem;
+            line-height: 1.5;
+          }
         }
       }
     }

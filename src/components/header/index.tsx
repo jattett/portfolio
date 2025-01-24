@@ -1,40 +1,50 @@
 import React, { useState, useEffect } from 'react';
 import HeaderStyled from './Styled';
 
-function Header() {
-  const [isScrolled, setIsScrolled] = useState(false);
+// Props 타입 정의
+interface HeaderProps {
+  fullpageApi?: {
+    moveTo: (section: string) => void; // `moveTo` 메서드 정의
+  };
+}
 
-  const handleScroll = () => {
-    setIsScrolled(window.scrollY > 0);
+const Header: React.FC<HeaderProps> = ({ fullpageApi }) => {
+  const [activeSection, setActiveSection] = useState<string>('first');
+
+  // 네비게이션 클릭 핸들러
+  const handleNavigation = (section: string) => {
+    setActiveSection(section);
+    if (fullpageApi) {
+      fullpageApi.moveTo(section);
+    }
   };
 
-  useEffect(() => {
-    const optimizedHandleScroll = () => {
-      requestAnimationFrame(handleScroll);
-    };
-
-    window.addEventListener('scroll', optimizedHandleScroll);
-    return () => {
-      window.removeEventListener('scroll', optimizedHandleScroll);
-    };
-  }, []);
-
   return (
-    <HeaderStyled isScrolled={isScrolled}>
+    <HeaderStyled>
       <div className="header">
         <h1>DEV.GYUMIN</h1>
         <nav>
           <ul>
-            <li>MAIN</li>
-            <li>INFO</li>
-            <li>SKILL</li>
-            <li>PROJECT</li>
-            <li>TIMELINE</li>
+            <li className={activeSection === 'first' ? 'active' : ''} onClick={() => handleNavigation('first')}>
+              MAIN
+            </li>
+            <li className={activeSection === 'info' ? 'active' : ''} onClick={() => handleNavigation('info')}>
+              INFO
+            </li>
+            <li className={activeSection === 'Skill' ? 'active' : ''} onClick={() => handleNavigation('Skill')}>
+              SKILL
+            </li>
+            <li className={activeSection === 'Project' ? 'active' : ''} onClick={() => handleNavigation('Project')}>
+              PROJECT
+            </li>
+            <li className={activeSection === 'Timeline' ? 'active' : ''} onClick={() => handleNavigation('Timeline')}>
+              TIMELINE
+            </li>
           </ul>
         </nav>
       </div>
     </HeaderStyled>
   );
-}
+};
 
 export default Header;
