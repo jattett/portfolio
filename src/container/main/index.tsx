@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Header from '../../components/header';
 import Styled from './Styled';
 import FirstContents from '../FirstContents';
@@ -8,21 +8,27 @@ import Project from '../Project';
 import Timeline from '../Timeline';
 import ReactFullpage from '@fullpage/react-fullpage';
 
+// fullpageApi 타입 정의
+type FullpageApiType = {
+  moveTo: (section: string) => void;
+};
+
 function Main() {
-  const [fullpageApi, setFullpageApi] = useState<any>(null); // fullpageApi 상태 관리
+  const [fullpageApi, setFullpageApi] = useState<FullpageApiType | null>(null); // 타입 명시
 
   return (
     <Styled>
-      {/* fullpageApi를 Header에 전달 */}
       <Header fullpageApi={fullpageApi} />
       <ReactFullpage
         scrollingSpeed={1000}
         anchors={['first', 'info', 'Skill', 'Project', 'Timeline']}
         navigation
         navigationTooltips={['First Contents', 'Info', 'Skill', 'Project', 'Timeline']}
+        credits={{ enabled: false }}
         render={({ fullpageApi }) => {
-          // fullpageApi를 상태로 저장
-          setFullpageApi(fullpageApi);
+          if (!fullpageApi) {
+            setFullpageApi(fullpageApi); // 상태 초기화
+          }
           return (
             <ReactFullpage.Wrapper>
               <div className="section">

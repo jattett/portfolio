@@ -1,4 +1,3 @@
-import React from 'react';
 import Styled from './Styled';
 import reactLogo from '../../assets/react.svg'; // 예: React 로고 이미지
 import htmlLogo from '../../assets/html.svg'; // 예: HTML 로고 이미지
