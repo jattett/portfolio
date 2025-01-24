@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import HeaderStyled from './Styled';
 
 // Props 타입 정의
