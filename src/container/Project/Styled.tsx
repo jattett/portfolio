@@ -2,7 +2,7 @@ import styled, { keyframes } from 'styled-components';
 
 const fadeInfinity = keyframes`
   0% {
-    opacity: 0;
+    opacity: 1;
   }
   15% {
     opacity: 0;
@@ -17,6 +17,19 @@ const fadeInfinity = keyframes`
     opacity: 1;
   }
 `;
+
+const pulseBoxShadow = keyframes`
+  0% {
+    box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
+  }
+  50% {
+    box-shadow: 0 0 20px #39ff14, 0 0 40px #39ff14, 0 0 60px #39ff14;
+  }
+  100% {
+    box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
+  }
+`;
+
 const Styled = styled.div`
   width: 100vw;
   height: 100vh;
@@ -35,6 +48,8 @@ const StyledSlider = styled.div`
   border-radius: 20px;
   display: flex;
   align-items: center;
+  box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
+  animation: ${pulseBoxShadow} 3s infinite;
   .slider {
     position: relative;
     overflow: hidden;
