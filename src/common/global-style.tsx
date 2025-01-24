@@ -80,17 +80,6 @@ const GlobalStyle = createGlobalStyle`
 
 
   
-.fp-nav {
-  ul {
-    li {
-      a {
-        span {
-          background-color: #39ff14;
-        }
-      }
-    }
-  }
-}
 
 body:not(.fp-responsive) .fp-overflow {
   overflow: hidden !important; /* 필요하면 직접 수정 */

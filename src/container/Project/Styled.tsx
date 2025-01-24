@@ -29,49 +29,63 @@ const Styled = styled.div`
 `;
 
 const StyledSlider = styled.div`
-  width: 80%;
-  margin: 0 auto;
-  padding: 50px 0;
-  background: #000;
-  height: 60vh;
+  width: 80vw;
+  height: 80vh;
+  background-color: #000;
   border-radius: 20px;
+  display: flex;
+  align-items: center;
+  .slider {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out; /* 부드러운 슬라이드 전환 */
+  }
 
   .slide {
+    flex: 0 0 100%;
+    text-align: center;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    text-align: center;
+    gap: 10px;
 
     img {
-      width: 100%;
-      max-width: 600px;
-      height: 40vh;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       background-color: #cdcdcd;
+      width: 70vw;
+      height: 50vh;
+      margin-bottom: 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
-
     .click-text {
       font-size: var(--font-md);
-      margin-bottom: 10px;
-      animation: ${fadeInfinity} 5s infinite;
       color: #39ff14;
-      text-shadow: 0 0 0px #39ff14, 0 0 17px #39ff14, 0 0 0px #39ff14, 0 0 8px #39ff14, 0 0 30px #32cd32,
-        0 0 6px #228b22;
+      text-shadow: 0 0 0px #39ff14, 0 0 17px #39ff14, 0 0 0px #39ff14, 0 0 8px #39ff14, 0 0 30px #32cd32;
+      animation: ${fadeInfinity} 5s infinite;
     }
 
     .content {
       h3 {
         font-size: var(--font-xxl);
-        margin-bottom: 10px;
         color: #39ff14;
         text-shadow: 0 0 0px #39ff14, 0 0 17px #39ff14, 0 0 0px #39ff14, 0 0 8px #39ff14, 0 0 30px #32cd32,
           0 0 6px #228b22;
+        margin-bottom: 10px;
       }
 
       p {
-        font-size: var(--font-md);
+        font-size: var(--font-lg);
+        font-size: 1rem;
         color: #39ff14;
         text-shadow: 0 0 0px #39ff14, 0 0 17px #39ff14, 0 0 0px #39ff14, 0 0 8px #39ff14, 0 0 30px #32cd32,
           0 0 6px #228b22;
@@ -81,7 +95,7 @@ const StyledSlider = styled.div`
 `;
 
 const Modal = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -118,13 +132,14 @@ const Modal = styled.div`
 
     .close-button {
       position: absolute;
-      top: 10px;
-      right: 10px;
+      top: 20%;
+      right: 20%;
       background: none;
       border: none;
       font-size: 1.5rem;
-      color: #333;
+      color: #fff;
       cursor: pointer;
+      z-index: 1;
 
       &:hover {
         color: red;
