@@ -1,4 +1,19 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const Typing = keyframes`
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%; 
+  }
+`;
+
+const Blink = keyframes`
+  50% {
+    border-right-color: transparent; 
+  }
+`;
 
 const Styled = styled.div`
   width: 100vw;
@@ -58,8 +73,9 @@ const Styled = styled.div`
 
 const NeonBorder = styled.div`
   width: 70vw;
-  padding: 40px 30px;
+  padding: 30px;
   border: 4px solid transparent;
+  font-family: 'Press Start 2P', monospace;
   border-radius: 20px;
   background-size: 300% 300%;
   border: 4px solid #39ff14;
@@ -67,14 +83,21 @@ const NeonBorder = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  font-size: 36px;
-  font-weight: 700;
   color: #39ff14;
   font-family: 'Bebas Neue', serif;
   text-shadow: 0 0 0px #39ff14, 0 0 17px #39ff14, 0 0 0px #39ff14, 0 0 8px #39ff14, 0 0 30px #32cd32, 0 0 6px #228b22;
   box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
-  rotate: 5deg;
+  p {
+    animation: ${Typing} 4s steps(30) 1 normal both, ${Blink} 0.5s step-end infinite;
+    font-weight: 700;
+    font-size: var(--font-xl);
+    font-family: 'Press Start 2P', monospace;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid #39ff14;
+    animation: ${Typing} 4s steps(30) 1 normal both, ${Blink} 0.5s step-end infinite;
+    padding: 10px;
+  }
 `;
 
 export { Styled, NeonBorder };

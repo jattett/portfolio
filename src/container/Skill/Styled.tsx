@@ -33,11 +33,11 @@ const Styled = styled.div`
     overflow: hidden;
     position: relative;
     background-color: #000;
-    width: 80vw;
+    width: 65vw;
     min-height: 40vh;
     padding: 30px 40px;
     grid-template-columns: 1.5fr 0.5fr;
-    gap: 40px;
+    gap: 20px;
     animation: ${pulseBoxShadow} 2s infinite;
 
     h1 {

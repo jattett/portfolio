@@ -76,6 +76,7 @@ const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 
   
@@ -89,6 +90,10 @@ const GlobalStyle = createGlobalStyle`
       }
     }
   }
+}
+
+body:not(.fp-responsive) .fp-overflow {
+  overflow: hidden !important; /* 필요하면 직접 수정 */
 }
 
 `;

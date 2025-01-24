@@ -38,13 +38,14 @@ const Styled = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
+
   .left-text {
     position: absolute;
     animation: ${LeftOpacity} 4s;
     opacity: 0;
     font-weight: 700;
     color: #39ff14;
-    font-family: 'Bebas Neue', serif;
+    font-family: 'Press Start 2P', monospace;
     text-shadow: 0 0 0px #39ff14, 0 0 17px #39ff14, 0 0 0px #39ff14, 0 0 8px #39ff14, 0 0 30px #32cd32, 0 0 6px #228b22;
     &.first {
       left: 10%;
@@ -71,7 +72,7 @@ const Styled = styled.div`
     opacity: 0;
     font-weight: 700;
     color: #39ff14;
-    font-family: 'Bebas Neue', serif;
+    font-family: 'Press Start 2P', monospace;
     text-shadow: 0 0 0px #39ff14, 0 0 17px #39ff14, 0 0 0px #39ff14, 0 0 8px #39ff14, 0 0 30px #32cd32, 0 0 6px #228b22;
     &.first {
       right: 10%;
@@ -97,7 +98,7 @@ const Styled = styled.div`
     text-align: center;
     overflow: hidden;
     color: #39ff14;
-    font-family: 'Bebas Neue', serif;
+    font-family: 'Press Start 2P', monospace;
     text-shadow: 0 0 0px #39ff14, 0 0 17px #39ff14, 0 0 0px #39ff14, 0 0 8px #39ff14, 0 0 30px #32cd32, 0 0 6px #228b22;
     padding: 40px;
 
