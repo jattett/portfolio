@@ -50,7 +50,7 @@ const HeaderStyled = styled.div<HeaderStyledProps>`
     padding: 30px 40px;
     background-color: var(--black-color);
     h1 {
-      font-family: 'Jersey 15', serif;
+      font-family: 'Press Start 2P', monospace;
       animation: ${bgGradient} 5s linear infinite;
       font-weight: 700;
       font-size: var(--font-xxl);
@@ -79,13 +79,12 @@ const HeaderStyled = styled.div<HeaderStyledProps>`
         align-items: center;
         gap: 30px;
         li {
-          font-family: 'Jersey 15', serif;
+          font-family: 'Press Start 2P', monospace;
           font-size: var(--font-sd);
           position: relative;
           cursor: pointer;
           transition: 0.3s ease-in;
           color: #39ff14;
-          font-family: 'Bebas Neue', serif;
           text-shadow: 0 0 0px #39ff14, 0 0 17px #39ff14, 0 0 0px #39ff14, 0 0 8px #39ff14, 0 0 30px #32cd32,
             0 0 6px #228b22;
           &::before {

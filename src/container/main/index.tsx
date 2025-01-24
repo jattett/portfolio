@@ -12,9 +12,9 @@ function Main() {
       <Header />
       <ReactFullpage
         scrollingSpeed={1000}
-        anchors={['first', 'info']}
+        anchors={['first', 'info', 'Skill', 'Project']}
         navigation
-        navigationTooltips={['First Contents', 'Info']}
+        navigationTooltips={['First Contents', 'Info', 'Skill', 'Project']}
         render={() => (
           <ReactFullpage.Wrapper>
             <div className="section">

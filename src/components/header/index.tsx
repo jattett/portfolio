@@ -25,7 +25,7 @@ function Header() {
         <h1>DEV.GYUMIN</h1>
         <nav>
           <ul>
-            <li>Main</li>
+            <li>MAIN</li>
             <li>INFO</li>
             <li>SKILL</li>
             <li>PROJECT</li>
