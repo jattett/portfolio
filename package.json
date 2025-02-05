@@ -27,6 +27,9 @@
     "tiny-slider": "^2.9.4"
   },
   "devDependencies": {
+    "@babel/core": "^7.26.7",
+    "@babel/plugin-transform-runtime": "^7.25.9",
+    "@babel/preset-env": "^7.26.7",
     "@eslint/js": "^9.17.0",
     "@types/fullpage.js": "^2.9.6",
     "@types/glider-js": "^1.7.11",
