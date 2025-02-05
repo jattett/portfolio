@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import HeaderStyled from './Styled';
 
 // Props 타입 정의
@@ -7,6 +7,15 @@ interface HeaderProps {
     moveTo: (section: string) => void; // `moveTo` 메서드 정의
   };
 }
+
+// 섹션 배열을 컴포넌트 외부로 분리
+const sections = [
+  { id: 'first', label: 'MAIN' },
+  { id: 'info', label: 'INFO' },
+  { id: 'Skill', label: 'SKILL' },
+  { id: 'Project', label: 'PROJECT' },
+  { id: 'Timeline', label: 'TIMELINE' },
+];
 
 const Header: React.FC<HeaderProps> = ({ fullpageApi }) => {
   const [activeSection, setActiveSection] = useState<string>('first');
@@ -21,19 +30,20 @@ const Header: React.FC<HeaderProps> = ({ fullpageApi }) => {
     setActiveSection(section); // 상태 업데이트
   };
 
+  // activeSection 상태 업데이트를 위한 useEffect
+  useEffect(() => {
+    if (fullpageApi) {
+      fullpageApi.moveTo(activeSection);
+    }
+  }, [activeSection, fullpageApi]);
+
   return (
     <HeaderStyled>
       <div className="header">
         <h1>DEV.GYUMIN</h1>
         <nav>
           <ul>
-            {[
-              { id: 'first', label: 'MAIN' },
-              { id: 'info', label: 'INFO' },
-              { id: 'Skill', label: 'SKILL' },
-              { id: 'Project', label: 'PROJECT' },
-              { id: 'Timeline', label: 'TIMELINE' },
-            ].map(({ id, label }) => (
+            {sections.map(({ id, label }) => (
               <li key={id} className={activeSection === id ? 'active' : ''} onClick={() => handleNavigation(id)}>
                 {label}
               </li>

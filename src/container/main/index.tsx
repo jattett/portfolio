@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../../components/header';
 import Styled from './Styled';
 import FirstContents from '../FirstContents';
@@ -13,22 +13,31 @@ type FullpageApiType = {
   moveTo: (section: string) => void;
 };
 
+const anchors = ['first', 'info', 'Skill', 'Project', 'Timeline'];
+const tooltips = ['First Contents', 'Info', 'Skill', 'Project', 'Timeline'];
+
 function Main() {
-  const [fullpageApi, setFullpageApi] = useState<FullpageApiType | null>(null); // 타입 명시
+  const [fullpageApi, setFullpageApi] = useState<FullpageApiType | null>(null);
+
+  useEffect(() => {
+    if (fullpageApi) {
+      // fullpageApi가 설정된 후 추가 초기화 작업
+      console.log('Fullpage API initialized');
+    }
+  }, [fullpageApi]);
 
   return (
     <Styled>
-      <Header fullpageApi={fullpageApi} />
+      {fullpageApi && <Header fullpageApi={fullpageApi} />}
       <ReactFullpage
         scrollingSpeed={1000}
-        anchors={['first', 'info', 'Skill', 'Project', 'Timeline']}
+        anchors={anchors}
         navigation
-        navigationTooltips={['First Contents', 'Info', 'Skill', 'Project', 'Timeline']}
+        navigationTooltips={tooltips}
         credits={{ enabled: false }}
+        normalScrollElements=".custom-slider" // 슬라이더 요소를 지정하여 스크롤 이벤트 무시
         render={({ fullpageApi }) => {
-          if (!fullpageApi) {
-            setFullpageApi(fullpageApi); // 상태 초기화
-          }
+          setFullpageApi(fullpageApi); // 상태 초기화
           return (
             <ReactFullpage.Wrapper>
               <div className="section">

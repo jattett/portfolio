@@ -61,11 +61,21 @@ const StyledSlider = styled.div`
   }
 
   .slides {
+    height: 100%;
     display: flex;
     transition: transform 0.5s ease-in-out; /* 부드러운 슬라이드 전환 */
+    .fp-arrow {
+      &.fp-prev {
+        border-color: transparent #39ff14 transparent transparent !important;
+      }
+      &.fp-next {
+        border-color: transparent transparent transparent #39ff14 !important;
+      }
+    }
   }
 
   .slide {
+    height: 100%;
     flex: 0 0 100%;
     text-align: center;
     display: flex;
@@ -73,6 +83,14 @@ const StyledSlider = styled.div`
     justify-content: center;
     align-items: center;
     gap: 10px;
+    .fp-overflow {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+    }
 
     img {
       background-color: #cdcdcd;

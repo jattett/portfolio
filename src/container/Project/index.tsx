@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { StyledSlider, Styled, Modal } from './Styled';
 
 // 슬라이더 데이터
@@ -39,10 +39,16 @@ const PortfolioSlider: React.FC = () => {
     setSelectedProject(null);
   };
 
+  // 스크롤 이벤트 차단 핸들러
+  const preventScroll = (e: React.UIEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+  };
+
   return (
     <Styled>
       <StyledSlider>
-        <div className="slider">
+        <div className="slider" onWheel={preventScroll} onTouchMove={preventScroll} onScroll={preventScroll}>
           <div className="slides">
             {projects.map((project) => (
               <div className="slide" key={project.id}>
