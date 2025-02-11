@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Styled from './Styled';
 
 // 📌 데이터 타입 정의
