@@ -3,7 +3,7 @@ import Header from '../../components/header';
 import Styled from './Styled';
 import FirstContents from '../FirstContents';
 import Info from '../Info';
-import Skill from '../Skill';
+import Contact from '../Contact';
 import Project from '../Project';
 import Timeline from '../Timeline';
 import ReactFullpage from '@fullpage/react-fullpage';
@@ -13,8 +13,8 @@ type FullpageApiType = {
   moveTo: (section: string) => void;
 };
 
-const anchors = ['first', 'info', 'Skill', 'Project', 'Timeline'];
-const tooltips = ['First Contents', 'Info', 'Skill', 'Project', 'Timeline'];
+const anchors = ['first', 'info', 'Timeline', 'Project', 'Contact'];
+const tooltips = ['First Contents', 'Info', 'Timeline', 'Project', 'Contact'];
 
 function Main() {
   const [fullpageApi, setFullpageApi] = useState<FullpageApiType | null>(null);
@@ -47,13 +47,13 @@ function Main() {
                 <Info />
               </div>
               <div className="section">
-                <Skill />
+                <Timeline />
               </div>
               <div className="section">
                 <Project />
               </div>
               <div className="section">
-                <Timeline />
+                <Contact />
               </div>
             </ReactFullpage.Wrapper>
           );

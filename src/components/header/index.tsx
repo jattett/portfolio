@@ -12,9 +12,9 @@ interface HeaderProps {
 const sections = [
   { id: 'first', label: 'MAIN' },
   { id: 'info', label: 'INFO' },
-  { id: 'Skill', label: 'SKILL' },
-  { id: 'Project', label: 'PROJECT' },
   { id: 'Timeline', label: 'TIMELINE' },
+  { id: 'Project', label: 'PROJECT' },
+  { id: 'Contact', label: 'CONTACT' },
 ];
 
 const Header: React.FC<HeaderProps> = ({ fullpageApi }) => {

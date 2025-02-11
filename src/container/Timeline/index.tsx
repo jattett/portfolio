@@ -23,17 +23,19 @@ function Timeline() {
   return (
     <Styled>
       <div className="timeline-container">
-        <h1 className="timeline-title">My Timeline</h1>
-        <div className="timeline">
-          {timelineData.map((item, index) => (
-            <div key={index} className="timeline-item">
-              <div className="timeline-date">{item.date}</div>
-              <div className="timeline-content">
-                <h2>{item.title}</h2>
-                <p>{item.description}</p>
+        <div className="contents-wrapper">
+          <h1 className="timeline-title">My Timeline</h1>
+          <div className="timeline">
+            {timelineData.map((item, index) => (
+              <div key={index} className="timeline-item">
+                <div className="timeline-date">{item.date}</div>
+                <div className="timeline-content">
+                  <h2>{item.title}</h2>
+                  <p>{item.description}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </Styled>

@@ -1,5 +1,4 @@
 import { Styled, NeonBorder } from './Styled';
-import Profile from '../../assets/react.svg';
 
 function FirstContents() {
   return (
@@ -30,7 +29,7 @@ function FirstContents() {
           </p>
         </div>
         <div className="img-section">
-          <img src={Profile}></img>
+          <img></img>
         </div>
       </div>
     </Styled>

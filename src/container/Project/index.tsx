@@ -5,21 +5,37 @@ import { StyledSlider, Styled, Modal } from './Styled';
 const projects = [
   {
     id: 1,
-    title: 'eCommerce Website',
-    description: 'React와 TypeScript를 사용해 상품 필터링 및 검색 기능을 구현한 프로젝트입니다.',
-    image: 'https://via.placeholder.com/600x300?text=eCommerce+Project',
+    title: 'DreamScapeAI',
+    description:
+      'React와 TypeScript 그리고 구글 제미나이와 이미지 오픈 API를 사용해 생성형 이미지 AI를 활용해 만든 서비스 입니다.',
+    image: '/assets/project/ai_project.png',
+    subdescription:
+      'DreamScapeAI는 사용자가 입력한 텍스트를 기반으로 이미지를 생성하는 인공지능 서비스입니다. 이 프로젝트는 React와 TypeScript를 사용하여 개발되었으며, Google Gemini와 이미지 생성 오픈 API를 활용하여 텍스트 설명을 이미지로 변환하는 기능을 구현하였습니다.',
+    skill: 'React,TypeScript,Gemini API, RESTful API, Firebase, AWS',
   },
   {
     id: 2,
-    title: 'Portfolio Website',
-    description: 'React와 Styled-Components를 활용해 제작한 반응형 포트폴리오 웹사이트입니다.',
-    image: 'https://via.placeholder.com/600x300?text=Portfolio+Website',
+    title: '맛운로드',
+    description: 'React와 Kakao Map API 를 활용 하여 만든, 맛집 찾기, 종합운동장 찾기 서비스 입니다.',
+    image: '/assets/project/ai_project.png',
   },
   {
     id: 3,
-    title: 'Todo App',
-    description: 'React와 Redux를 사용하여 상태 관리 및 CRUD 기능을 구현한 프로젝트입니다.',
-    image: 'https://via.placeholder.com/600x300?text=Todo+App',
+    title: 'AI 코인 차트 분석 서비스',
+    description: '준비중',
+    image: '/assets/project/potpol_project.png',
+  },
+  {
+    id: 4,
+    title: '포트폴리오 사이트',
+    description: 'Vite, React, TypeScript를 사용하여 인터렉션을 중점적으로 만든 사이트 입니다.',
+    image: '/assets/project/potpol_project.png',
+  },
+  {
+    id: 5,
+    title: 'Your Trip',
+    description: 'React를 활용하여 공공 데이터 API로 만든 전국 여행지 추천 서비스입니다.',
+    image: '/assets/project/yourtrip_project.png',
   },
 ];
 
@@ -29,6 +45,7 @@ const PortfolioSlider: React.FC = () => {
 
   // 이미지 클릭 핸들러
   const handleImageClick = (project: (typeof projects)[0]) => {
+    console.log('프로젝트 선택됨:', project); // 확인을 위한 콘솔 로그
     setSelectedProject(project);
     setIsModalOpen(true);
   };
@@ -56,7 +73,7 @@ const PortfolioSlider: React.FC = () => {
                 <img
                   src={project.image}
                   alt={project.title}
-                  onClick={() => handleImageClick(project)}
+                  onClick={() => handleImageClick(project)} // 클릭 시 프로젝트 데이터 전달
                   style={{ cursor: 'pointer' }}
                 />
                 <div className="content">
@@ -76,9 +93,17 @@ const PortfolioSlider: React.FC = () => {
             <button className="close-button" onClick={closeModal}>
               &times;
             </button>
-            <img src={selectedProject.image} alt={selectedProject.title} />
-            <h3>{selectedProject.title}</h3>
-            <p>{selectedProject.description}</p>
+            <div className="content-area">
+              <div>
+                <img src={selectedProject.image} alt={selectedProject.title} />
+              </div>
+              <p>사용한 스킬</p>
+              <div>{selectedProject.skill}</div>
+            </div>
+            <div className="info-area">
+              <h3>{selectedProject.title}</h3>
+              <p>{selectedProject.subdescription}</p>
+            </div>
           </div>
         </Modal>
       )}

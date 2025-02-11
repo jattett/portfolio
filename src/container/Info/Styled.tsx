@@ -72,7 +72,7 @@ const Styled = styled.div`
 `;
 
 const NeonBorder = styled.div`
-  width: 70vw;
+  width: fit-content;
   padding: 30px;
   border: 4px solid transparent;
   font-family: 'Press Start 2P', monospace;

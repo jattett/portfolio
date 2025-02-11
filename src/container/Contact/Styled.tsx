@@ -23,7 +23,7 @@ const Styled = styled.div`
   justify-content: center;
   gap: 10vh;
 
-  .skill-wrapper {
+  .contact-wrapper {
     box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
     border-radius: 20px;
     display: flex;
@@ -48,42 +48,20 @@ const Styled = styled.div`
       font-size: var(--font-lg);
     }
 
-    .skill-bar {
-      margin-bottom: 20px;
-      width: 100%;
-
-      .label {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 5px;
-        font-size: 1rem;
+    .contact-detail {
+      font-size: 1.2rem;
+      color: #39ff14;
+      margin-bottom: 15px;
+      a {
         color: #39ff14;
-        text-shadow: 0 0 0px #39ff14, 0 0 17px #39ff14, 0 0 0px #39ff14, 0 0 8px #39ff14, 0 0 30px #32cd32,
-          0 0 6px #228b22;
-        .skill-title {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-          img {
-            width: 30px;
-            height: 30px;
-          }
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
         }
       }
 
-      .bar-container {
-        background: #333;
-        border-radius: 10px;
-        overflow: hidden;
-        height: 20px;
-
-        .bar {
-          height: 100%;
-          background: linear-gradient(90deg, #00ff00, #00cc00);
-          box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
-          border-radius: 10px;
-        }
+      strong {
+        color: #fff;
       }
     }
   }

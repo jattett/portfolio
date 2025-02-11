@@ -42,7 +42,7 @@ const Styled = styled.div`
 `;
 
 const StyledSlider = styled.div`
-  width: 80vw;
+  width: 85vw;
   height: 80vh;
   background-color: #000;
   border-radius: 20px;
@@ -89,13 +89,14 @@ const StyledSlider = styled.div`
       display: flex;
       align-items: center;
       flex-direction: column;
-      justify-content: center;
+      padding: 40px 30px;
+      justify-content: space-between;
     }
 
     img {
       background-color: #cdcdcd;
       width: 70vw;
-      height: 50vh;
+      height: 55vh;
       margin-bottom: 20px;
       border-radius: 20px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -119,9 +120,7 @@ const StyledSlider = styled.div`
       p {
         font-size: var(--font-lg);
         font-size: 1rem;
-        color: #39ff14;
-        text-shadow: 0 0 0px #39ff14, 0 0 17px #39ff14, 0 0 0px #39ff14, 0 0 8px #39ff14, 0 0 30px #32cd32,
-          0 0 6px #228b22;
+        color: #fff;
       }
     }
   }
@@ -143,10 +142,15 @@ const Modal = styled.div`
     background: white;
     padding: 20px;
     border-radius: 10px;
-    width: 90%;
-    max-width: 600px;
+    width: 100%;
+    max-width: 80vw;
+    height: 70vh;
     text-align: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 60px 50px;
 
     img {
       width: 100%;
@@ -162,15 +166,18 @@ const Modal = styled.div`
     p {
       font-size: 1rem;
     }
+    .info-area {
+      flex: 100%;
+    }
 
     .close-button {
       position: absolute;
-      top: 20%;
-      right: 20%;
+      top: 100px;
+      right: 100px;
+      font-size: 50px;
       background: none;
       border: none;
-      font-size: 1.5rem;
-      color: #fff;
+      color: #000;
       cursor: pointer;
       z-index: 1;
 
