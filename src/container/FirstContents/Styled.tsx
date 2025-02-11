@@ -30,6 +30,18 @@ const blink = keyframes`
   100% { opacity: 1; }
 `;
 
+const arrowBounce = keyframes`
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+`;
+
 const Styled = styled.div`
   width: 100vw;
   height: 100vh;
@@ -113,6 +125,13 @@ const Styled = styled.div`
         opacity: 0;
       }
     }
+  }
+
+  .scroll-arrow {
+    cursor: pointer;
+    position: absolute;
+    bottom: 20px;
+    animation: ${arrowBounce} 2s infinite;
   }
 `;
 
