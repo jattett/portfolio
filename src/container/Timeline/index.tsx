@@ -108,8 +108,8 @@ function Timeline() {
               <p className="description">{modalContent.description}</p>
             </div>
             <div className="project-info">
-              <h3>진행 프로젝트</h3>
               <div className="project-contents-wrapper">
+                <h3>진행 프로젝트</h3>
                 <ul>
                   {modalContent.info.map((text, index) => (
                     <li
@@ -121,15 +121,15 @@ function Timeline() {
                     </li>
                   ))}
                 </ul>
-                <div className="index-result-wrapper">
-                  <p>{modalContent.skill[selectedImageIndex]}</p>
-                  <div className="project-image">
-                    {modalContent.images.length > 0 ? (
-                      <img src={modalContent.images[selectedImageIndex]} alt={`project-${selectedImageIndex}`} />
-                    ) : (
-                      <p>이미지가 없습니다.</p>
-                    )}
-                  </div>
+              </div>
+              <div className="index-result-wrapper">
+                <p>{modalContent.skill[selectedImageIndex]}</p>
+                <div className="project-image">
+                  {modalContent.images.length > 0 ? (
+                    <img src={modalContent.images[selectedImageIndex]} alt={`project-${selectedImageIndex}`} />
+                  ) : (
+                    <p>이미지가 없습니다.</p>
+                  )}
                 </div>
               </div>
             </div>
