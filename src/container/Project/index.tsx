@@ -12,30 +12,52 @@ const projects = [
     subdescription:
       'DreamScapeAI는 사용자가 입력한 텍스트를 기반으로 이미지를 생성하는 인공지능 서비스입니다. 이 프로젝트는 React와 TypeScript를 사용하여 개발되었으며, Google Gemini와 이미지 생성 오픈 API를 활용하여 텍스트 설명을 이미지로 변환하는 기능을 구현하였습니다.',
     skill: 'React,TypeScript,Gemini API, RESTful API, Firebase, AWS',
+    playUrl: '',
+    Contribution: '',
   },
   {
     id: 2,
     title: '맛운로드',
     description: 'React와 Kakao Map API 를 활용 하여 만든, 맛집 찾기, 종합운동장 찾기 서비스 입니다.',
     image: '/assets/project/ai_project.png',
+    subdescription:
+      'DreamScapeAI는 사용자가 입력한 텍스트를 기반으로 이미지를 생성하는 인공지능 서비스입니다. 이 프로젝트는 React와 TypeScript를 사용하여 개발되었으며, Google Gemini와 이미지 생성 오픈 API를 활용하여 텍스트 설명을 이미지로 변환하는 기능을 구현하였습니다.',
+    skill: 'React,TypeScript,Gemini API, RESTful API, Firebase, AWS',
+    playUrl: '',
+    Contribution: '',
   },
   {
     id: 3,
     title: 'AI 코인 차트 분석 서비스',
     description: '준비중',
     image: '/assets/project/potpol_project.png',
+    subdescription:
+      'DreamScapeAI는 사용자가 입력한 텍스트를 기반으로 이미지를 생성하는 인공지능 서비스입니다. 이 프로젝트는 React와 TypeScript를 사용하여 개발되었으며, Google Gemini와 이미지 생성 오픈 API를 활용하여 텍스트 설명을 이미지로 변환하는 기능을 구현하였습니다.',
+    skill: 'React,TypeScript,Gemini API, RESTful API, Firebase, AWS',
+    playUrl: '',
+    Contribution: '',
   },
   {
     id: 4,
     title: '포트폴리오 사이트',
     description: 'Vite, React, TypeScript를 사용하여 인터렉션을 중점적으로 만든 사이트 입니다.',
     image: '/assets/project/potpol_project.png',
+    subdescription:
+      'DreamScapeAI는 사용자가 입력한 텍스트를 기반으로 이미지를 생성하는 인공지능 서비스입니다. 이 프로젝트는 React와 TypeScript를 사용하여 개발되었으며, Google Gemini와 이미지 생성 오픈 API를 활용하여 텍스트 설명을 이미지로 변환하는 기능을 구현하였습니다.',
+    skill: 'React,TypeScript,Gemini API, RESTful API, Firebase, AWS',
+    playUrl: '',
+    Contribution: '',
   },
   {
     id: 5,
     title: 'Your Trip',
     description: 'React를 활용하여 공공 데이터 API로 만든 전국 여행지 추천 서비스입니다.',
     image: '/assets/project/yourtrip_project.png',
+    subdescription:
+      'DreamScapeAI는 사용자가 입력한 텍스트를 기반으로 이미지를 생성하는 인공지능 서비스입니다. 이 프로젝트는 React와 TypeScript를 사용하여 개발되었으며, Google Gemini와 이미지 생성 오픈 API를 활용하여 텍스트 설명을 이미지로 변환하는 기능을 구현하였습니다.',
+    skill: 'React,TypeScript,Gemini API, RESTful API, Firebase, AWS',
+    playUrl: '',
+    Contribution: '',
   },
 ];
 

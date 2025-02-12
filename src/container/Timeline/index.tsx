@@ -1,43 +1,74 @@
 import { useState } from 'react';
 import Styled from './Styled';
+import { MdClose } from 'react-icons/md';
 
 // 📌 데이터 타입 정의
 interface TimelineItem {
   date: string;
   title: string;
   description: string;
+  info: string[]; // ✅ 수정: JSX 대신 문자열 배열 사용
+  images: string[];
+  skill: string[];
 }
 
 function Timeline() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState<TimelineItem>({ title: '', description: '', date: '' });
+  const [modalContent, setModalContent] = useState<TimelineItem>({
+    title: '',
+    description: '',
+    date: '',
+    skill: [],
+    info: [],
+    images: [],
+  });
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0); // ✅ 선택된 이미지 인덱스
 
-  // 📌 `timelineData` 배열에 대한 타입 적용
   const timelineData: TimelineItem[] = [
     {
-      date: '2023.03 ~ 2023.09',
-      title: '리비에라 소프트(퍼블리셔)',
-      description: '자사 홈페이지 구축',
+      date: '2023.03 ~ 2024.04',
+      title: '리비에라 소프트 / 빅독',
+      description: '프론트엔드 및 퍼블리셔',
+      info: [
+        '자사 서비스 페이지 유지보수 - 기존 UI 개선 및 성능 최적화 진행',
+        '자사 서비스 페이지 구축 - 신규 페이지 개발 및 반응형 디자인 적용',
+      ],
+      skill: ['Html,CSS,JavaScript', 'Html,CSS,JavaScript,Sass'],
+      images: ['/assets/timeline/bigdog.png', '/assets/timeline/stone.png'],
     },
     {
-      date: '2023.09 ~ 2024.04',
-      title: '빅독 (퍼블리셔)',
-      description: '자사 홈페이지 구축',
-    },
-    {
-      date: '2024.04',
+      date: '2024.04 ~ 현재',
       title: '(주)클러쉬',
-      description:
-        'SK 하이닉스 스마트 쿠키 숏폼 퍼블리싱 작업, KB국민은행 협업플랫폼 워크비 퍼블리싱 운영 담당, 우리은행 데이터포털 퍼블리싱 운영 담당',
+      description: '프론트엔드 및 퍼블리셔',
+      info: [
+        'SK 하이닉스 스마트 쿠키 숏폼 퍼블리싱 - 모션 효과 및 반응형 UI 구현',
+        'KB국민은행 협업 플랫폼 "워크비" 퍼블리싱 운영 - UI 최적화 및 신규 기능 퍼블리싱',
+        '우리은행 데이터 포털 퍼블리싱 운영 - 데이터 시각화 및 접근성 개선',
+        '자사서비스 Clush 워크플레이스 협업툴 퍼블리싱 - 신규 기능 개발 및 UI/UX 개선',
+      ],
+      skill: [
+        'React,Styled-components,JavaScript',
+        'React,Styled-components,JavaScript',
+        'React,Styled-components,Antd,JavaScript,chart.js,Storybook',
+        'React,Styled-components,Antd,JavaScript',
+      ],
+      images: [
+        '/assets/timeline/project1.png',
+        '/assets/timeline/project2.png',
+        '/assets/timeline/project3.png',
+        '/assets/timeline/project4.png',
+      ],
     },
   ];
 
-  // 📌 `item` 매개변수에 타입 적용
+  // 📌 모달 열기 함수 (첫 번째 `li`와 이미지 기본 활성화)
   const openModal = (item: TimelineItem) => {
     setModalContent(item);
+    setSelectedImageIndex(0); // ✅ 첫 번째 이미지 및 li 기본 활성화
     setIsModalOpen(true);
   };
 
+  // 📌 모달 닫기 함수
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -56,18 +87,52 @@ function Timeline() {
                 <div className="timeline-date">{item.date}</div>
                 <div className="timeline-content" onClick={() => openModal(item)}>
                   <h2>{item.title}</h2>
-                  <p>{item.description}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </div>
+
       {isModalOpen && (
-        <div className="modal" onClick={closeModal}>
+        <div className={`modal ${isModalOpen ? 'open' : ''}`} onClick={closeModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h2>{modalContent.title}</h2>
-            <p>{modalContent.description}</p>
+            <button className="modal-close" onClick={closeModal}>
+              <MdClose size="24" color="#FFF" />
+            </button>
+            <div className="modal-detail-header">
+              <div className="modal-detail-title">
+                <h3>{modalContent.title}</h3>
+                <p>{modalContent.date}</p>
+              </div>
+              <p className="description">{modalContent.description}</p>
+            </div>
+            <div className="project-info">
+              <h3>진행 프로젝트</h3>
+              <div className="project-contents-wrapper">
+                <ul>
+                  {modalContent.info.map((text, index) => (
+                    <li
+                      key={index}
+                      onClick={() => setSelectedImageIndex(index)}
+                      className={selectedImageIndex === index ? 'active' : ''}
+                    >
+                      {text}
+                    </li>
+                  ))}
+                </ul>
+                <div className="index-result-wrapper">
+                  <p>{modalContent.skill[selectedImageIndex]}</p>
+                  <div className="project-image">
+                    {modalContent.images.length > 0 ? (
+                      <img src={modalContent.images[selectedImageIndex]} alt={`project-${selectedImageIndex}`} />
+                    ) : (
+                      <p>이미지가 없습니다.</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}

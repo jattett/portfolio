@@ -132,21 +132,21 @@ const Modal = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 
   .modal-content {
-    background: white;
+    background-color: #444444;
     padding: 20px;
     border-radius: 10px;
     width: 100%;
-    max-width: 80vw;
+    max-width: 60vw;
     height: 70vh;
     text-align: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: row;
     gap: 20px;
