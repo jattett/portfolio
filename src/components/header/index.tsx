@@ -19,6 +19,7 @@ const sections = [
 
 const Header: React.FC<HeaderProps> = ({ fullpageApi }) => {
   const [activeSection, setActiveSection] = useState<string>('first');
+  const [isScrolled, setIsScrolled] = useState(false);
 
   // 네비게이션 클릭 핸들러
   const handleNavigation = (section: string) => {
@@ -30,6 +31,10 @@ const Header: React.FC<HeaderProps> = ({ fullpageApi }) => {
     setActiveSection(section); // 상태 업데이트
   };
 
+  const handleScroll = () => {
+    setIsScrolled(window.scrollY > 0);
+  };
+
   // activeSection 상태 업데이트를 위한 useEffect
   useEffect(() => {
     if (fullpageApi) {
@@ -37,9 +42,16 @@ const Header: React.FC<HeaderProps> = ({ fullpageApi }) => {
     }
   }, [activeSection, fullpageApi]);
 
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <HeaderStyled>
-      <div className="header">
+      <div className={`header-wrapper ${isScrolled ? 'scrolled opacity-0' : ''}`}>
         <h1>DEV.GYUMIN</h1>
         <nav>
           <ul>

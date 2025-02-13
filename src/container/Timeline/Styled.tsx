@@ -200,6 +200,7 @@ const Styled = styled.div`
     border-radius: 20px;
     animation: ${modalOpen} 0.3s ease-in-out;
     position: relative;
+    box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
 
     &.close {
       animation: ${modalClose} 0.3s ease-in-out;
@@ -309,6 +310,7 @@ const Styled = styled.div`
           height: 40vh;
           border-radius: 20px;
           overflow: hidden;
+          background: #cdcdcd;
           img {
             width: 100%;
             height: 100%;

@@ -146,40 +146,84 @@ const Modal = styled.div`
     max-width: 60vw;
     height: 70vh;
     text-align: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 20px;
     padding: 60px 50px;
-
-    img {
-      width: 100%;
-      border-radius: 10px;
-      margin-bottom: 20px;
+    position: relative;
+    .modal-detail-title {
+      h3 {
+        font-size: 2rem;
+        color: #39ff14;
+        text-shadow: 0 0 0px #39ff14, 0 0 17px #39ff14, 0 0 0px #39ff14, 0 0 8px #39ff14, 0 0 30px #32cd32,
+          0 0 6px #228b22;
+      }
     }
-
-    h3 {
-      font-size: 1.5rem;
-      margin-bottom: 10px;
+    .content-area {
+      width: 50vw;
+      margin: 0 auto;
+      .slick-list {
+        img {
+          width: 100%;
+          height: 40vh;
+          border-radius: 20px;
+        }
+      }
     }
 
     p {
       font-size: 1rem;
     }
     .info-area {
-      flex: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      .skill-area {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 10px;
+        h3 {
+          color: #39ff14;
+          text-shadow: 0 0 0px #39ff14, 0 0 17px #39ff14, 0 0 0px #39ff14, 0 0 8px #39ff14, 0 0 30px #32cd32,
+            0 0 6px #228b22;
+        }
+        p {
+          color: #fff;
+          text-align: left;
+        }
+      }
+      .description-area {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 10px;
+        h3 {
+          color: #39ff14;
+          text-shadow: 0 0 0px #39ff14, 0 0 17px #39ff14, 0 0 0px #39ff14, 0 0 8px #39ff14, 0 0 30px #32cd32,
+            0 0 6px #228b22;
+        }
+        ul {
+          color: #fff;
+          text-align: left;
+        }
+      }
     }
 
     .close-button {
       position: absolute;
-      top: 100px;
-      right: 100px;
+      top: 0px;
+      right: 10px;
       font-size: 50px;
       background: none;
       border: none;
-      color: #000;
+      color: #fff;
       cursor: pointer;
       z-index: 1;
+      transition: all 0.3s ease-in-out;
 
       &:hover {
         color: red;

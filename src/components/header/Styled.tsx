@@ -36,15 +36,18 @@ const HeaderStyled = styled.div`
   max-height: 70px;
   position: fixed;
   z-index: 1;
-  box-shadow: -1px 9px 8px 4px rgba(0, 0, 0, 0.4);
   transition: 0.5s ease-in-out;
   opacity: 1;
-  .header {
+  .header-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 30px 40px;
     background-color: var(--black-color);
+    transition: opacity 0.7s ease;
+    &.scrolled {
+      opacity: 0;
+    }
     h1 {
       font-family: 'Press Start 2P', monospace;
       animation: ${bgGradient} 5s linear infinite;

@@ -51,7 +51,7 @@ const Styled = styled.div`
         font-size: var(--font-lg);
         color: #c0c0c0;
         word-break: break-word;
-        line-height: 1.3;
+        line-height: 1.5;
       }
       b {
         font-size: var(--font-xl);
