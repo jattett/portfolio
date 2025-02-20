@@ -146,7 +146,7 @@ const Styled = styled.div`
           .timeline-content {
             border: 2px solid #39ff14;
             box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
-            max-width: 400px;
+            max-width: 250px;
             width: 100%;
             border-radius: 10px;
             padding: 30px 20px;
@@ -158,6 +158,8 @@ const Styled = styled.div`
             text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14;
             color: #39ff14;
             cursor: pointer;
+            position: relative;
+            z-index: 2;
             &:hover {
               scale: 1.1;
             }
@@ -274,7 +276,6 @@ const Styled = styled.div`
           display: flex;
           flex-direction: column;
           gap: 10px;
-          margin-top: 30px;
           li {
             font-size: 1rem;
             line-height: 1.5;
@@ -301,9 +302,14 @@ const Styled = styled.div`
         gap: 20px;
         justify-content: flex-start;
         align-items: center;
+        position: relative;
+        .index-result-subtitle {
+          animation: ${fadeInfinity} 5s infinite;
+        }
         p {
           text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14;
           color: #39ff14;
+          word-break: break-all;
         }
         .project-image {
           width: 300px;
@@ -318,6 +324,45 @@ const Styled = styled.div`
         }
       }
     }
+  }
+  .drawer {
+    position: absolute;
+    top: 0;
+    right: -100%; /* 기본적으로 숨김 */
+    width: 300px;
+    height: 100vh;
+    background: #000;
+    color: white;
+    transition: right 0.3s ease-in-out;
+    padding: 20px;
+    box-shadow: -4px 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    border-radius: 15px 0 0 15px;
+    opacity: 0.8;
+    padding: 30px;
+  }
+
+  .drawer.open {
+    right: 0; /* 마우스를 올리면 나타남 */
+  }
+
+  .drawer-content h4 {
+    font-size: 21px;
+    text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14;
+    color: #39ff14;
+  }
+
+  .drawer-content ul {
+    margin-top: 20px;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .drawer-content ul li {
+    margin-bottom: 8px;
   }
 `;
 

@@ -34,7 +34,7 @@ const HeaderStyled = styled.div`
   width: 100%;
   height: 100%;
   max-height: 70px;
-  position: fixed;
+  position: absolute;
   z-index: 1;
   transition: 0.5s ease-in-out;
   opacity: 1;

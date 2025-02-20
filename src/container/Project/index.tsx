@@ -3,6 +3,7 @@ import { StyledSlider, Styled, Modal } from './Styled';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { FaGithub } from 'react-icons/fa';
 
 // 슬라이더 데이터
 const projects = [
@@ -120,8 +121,8 @@ const PortfolioSlider: React.FC = () => {
 
       {/* 모달 */}
       {isModalOpen && selectedProject && (
-        <Modal>
-          <div className="modal-content">
+        <Modal className={`modal ${isModalOpen ? 'open' : ''}`}>
+          <div className="modal-content open">
             <button className="close-button" onClick={closeModal}>
               &times;
             </button>
@@ -138,12 +139,18 @@ const PortfolioSlider: React.FC = () => {
                 autoplaySpeed={3000}
               >
                 {selectedProject.images.map((img, index) => (
-                  <div key={index}>
+                  <div className="image-wrapper" key={index}>
                     <img
                       src={img}
                       alt={`${selectedProject.title} 이미지 ${index + 1}`}
                       style={{ width: '100%', borderRadius: '10px' }}
                     />
+                    <div className="button-area">
+                      <button className="github-button">
+                        <FaGithub />
+                      </button>
+                      <button className="play-button">Play!</button>
+                    </div>
                   </div>
                 ))}
               </Slider>

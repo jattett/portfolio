@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import HeaderStyled from './Styled';
 
-// Props 타입 정의
 interface HeaderProps {
   fullpageApi?: {
-    moveTo: (section: string) => void; // `moveTo` 메서드 정의
+    moveTo: (section: string) => void;
   };
+  activeSection: string;
 }
 
-// 섹션 배열을 컴포넌트 외부로 분리
 const sections = [
   { id: 'first', label: 'MAIN' },
   { id: 'info', label: 'INFO' },
@@ -17,30 +16,18 @@ const sections = [
   { id: 'Contact', label: 'CONTACT' },
 ];
 
-const Header: React.FC<HeaderProps> = ({ fullpageApi }) => {
-  const [activeSection, setActiveSection] = useState<string>('first');
+const Header: React.FC<HeaderProps> = ({ fullpageApi, activeSection }) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // 네비게이션 클릭 핸들러
   const handleNavigation = (section: string) => {
     if (fullpageApi) {
-      fullpageApi.moveTo(section); // 섹션 이동
-    } else {
-      console.warn('fullpageApi is not available.'); // 디버깅용 경고
+      fullpageApi.moveTo(section);
     }
-    setActiveSection(section); // 상태 업데이트
   };
 
   const handleScroll = () => {
     setIsScrolled(window.scrollY > 0);
   };
-
-  // activeSection 상태 업데이트를 위한 useEffect
-  useEffect(() => {
-    if (fullpageApi) {
-      fullpageApi.moveTo(activeSection);
-    }
-  }, [activeSection, fullpageApi]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -51,7 +38,14 @@ const Header: React.FC<HeaderProps> = ({ fullpageApi }) => {
 
   return (
     <HeaderStyled>
-      <div className={`header-wrapper ${isScrolled ? 'scrolled opacity-0' : ''}`}>
+      <div
+        className={`header-wrapper ${isScrolled ? 'scrolled opacity-0' : ''}`}
+        style={{
+          opacity: activeSection === 'info' ? 0 : 1,
+          visibility: activeSection === 'info' ? 'hidden' : 'visible',
+          transition: 'opacity 0.3s ease-in-out, visibility 0.3s ease-in-out',
+        }}
+      >
         <h1>DEV.GYUMIN</h1>
         <nav>
           <ul>

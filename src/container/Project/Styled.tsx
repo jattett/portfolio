@@ -130,28 +130,39 @@ const Modal = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
   background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  &.open {
+    transition: all 0.3s ease-in-out;
+    width: 100vw;
+    height: 100vh;
+    opacity: 1;
+  }
+  &.close {
+    width: 0vw;
+    height: 0vh;
+  }
 
   .modal-content {
     background-color: #444444;
     padding: 20px;
     border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
     width: 100%;
     max-width: 60vw;
     height: 70vh;
-    text-align: center;
-    box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
     display: flex;
     flex-direction: column;
     gap: 20px;
     padding: 60px 50px;
     position: relative;
+    transition: all 0.3s ease-in-out;
     .modal-detail-title {
       h3 {
         font-size: 2rem;
@@ -168,6 +179,12 @@ const Modal = styled.div`
           width: 100%;
           height: 40vh;
           border-radius: 20px;
+        }
+      }
+      .slick-arrow {
+        &::before {
+          color: #fff;
+          font-size: 26px;
         }
       }
     }
@@ -227,6 +244,44 @@ const Modal = styled.div`
 
       &:hover {
         color: red;
+      }
+    }
+  }
+  .image-wrapper {
+    position: relative;
+    .button-area {
+      display: flex;
+      gap: 10px;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        color: #39ff14;
+        background-color: #000;
+        padding: 5px;
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        font-size: 30px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        opacity: 0.8;
+        &.github-button {
+          font-size: 30px;
+        }
+        &.play-button {
+          font-size: 20px;
+        }
+        &:hover {
+          color: #000;
+          background-color: #39ff14;
+          box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
+        }
       }
     }
   }
