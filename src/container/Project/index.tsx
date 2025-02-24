@@ -199,11 +199,10 @@ const PortfolioSlider: React.FC = () => {
                           </a>
                         </button>
                       )}
-                      {selectedProject.playlink && selectedProject.playlink !== '1' && (
-                        <button className="play-button">
-                          Play!
-                          <a href={selectedProject.playlink} target="_blank" rel="noreferrer"></a>
-                        </button>
+                      {selectedProject?.playlink && selectedProject.playlink !== '1' && (
+                        <a href={selectedProject.playlink} target="_blank" rel="noreferrer">
+                          <button className="play-button">Play!</button>
+                        </a>
                       )}
                     </div>
                   </div>

@@ -297,6 +297,9 @@ const Modal = styled.div`
       position: absolute;
       top: 10px;
       right: 10px;
+      a {
+        text-decoration: none;
+      }
       button {
         display: flex;
         align-items: center;
@@ -313,6 +316,7 @@ const Modal = styled.div`
         cursor: pointer;
         transition: all 0.3s ease-in-out;
         opacity: 0.8;
+        text-decoration: none;
         &.github-button {
           font-size: 30px;
           a {
@@ -320,6 +324,7 @@ const Modal = styled.div`
             align-items: center;
             justify-content: center;
             color: #39ff14;
+            text-decoration: none;
           }
         }
         &.play-button {
@@ -331,6 +336,7 @@ const Modal = styled.div`
           box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
           a {
             color: #000;
+            text-decoration: none;
           }
         }
       }
