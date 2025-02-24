@@ -85,6 +85,11 @@ body:not(.fp-responsive) .fp-overflow {
   overflow: hidden !important; /* 필요하면 직접 수정 */
 }
 
+#fp-nav{
+    span {
+      color: #fff;
+    }
+  }
 `;
 
 export default GlobalStyle;

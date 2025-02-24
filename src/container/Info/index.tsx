@@ -1,4 +1,5 @@
 import { Styled, NeonBorder } from './Styled';
+import ProfileImg from '../../../public/assets/me.jpg';
 
 function FirstContents() {
   return (
@@ -29,7 +30,7 @@ function FirstContents() {
           </p>
         </div>
         <div className="img-section">
-          <img></img>
+          <img src={ProfileImg}></img>
         </div>
       </div>
     </Styled>

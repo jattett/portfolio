@@ -1,5 +1,5 @@
 import Styled from './Styled';
-import { FaEnvelope, FaGithub, FaPhone, FaGlobe, FaBlog } from 'react-icons/fa';
+import { FaEnvelope, FaGithub, FaPhone, FaGlobe } from 'react-icons/fa';
 
 function Contact() {
   return (
@@ -14,22 +14,21 @@ function Contact() {
         <div className="scene">
           <div className="cube">
             <div className="cube-face face-front">
-              <h2>Contact Me</h2>
+              <p>
+                <div className="cube-title">
+                  <FaGithub /> <strong>GitHub</strong>{' '}
+                </div>
+                <a href="https://github.com/jattett" target="_blank" rel="noopener noreferrer">
+                  https://github.com/jattett
+                </a>
+              </p>
             </div>
             <div className="cube-face face-back">
               <p>
                 <div className="cube-title">
                   <FaEnvelope /> <strong>Email</strong>{' '}
                 </div>
-                <a href="mailto:your.email@example.com">your.email@example.com</a>
-              </p>
-              <p>
-                <div className="cube-title">
-                  <FaGithub /> <strong>GitHub</strong>{' '}
-                </div>
-                <a href="https://github.com/your-github" target="_blank" rel="noopener noreferrer">
-                  github.com/your-github
-                </a>
+                <a href="mailto:your.email@example.com">gnto2000@naver.com</a>
               </p>
             </div>
             <div className="cube-face face-left">
@@ -45,16 +44,8 @@ function Contact() {
                 <div className="cube-title">
                   <FaGlobe /> <strong>Website</strong>{' '}
                 </div>
-                <a href="https://your-portfolio.com" target="_blank" rel="noopener noreferrer">
-                  your-portfolio.com
-                </a>
-              </p>
-              <p>
-                <div className="cube-title">
-                  <FaBlog /> <strong>Blog:</strong>{' '}
-                </div>
-                <a href="https://your-blog.com" target="_blank" rel="noopener noreferrer">
-                  your-blog.com
+                <a href="https://portfolio-4vhc.vercel.app/" target="_blank" rel="noopener noreferrer">
+                  https://portfolio-4vhc.vercel.app/
                 </a>
               </p>
             </div>

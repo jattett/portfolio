@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Styled from './Styled';
 import { MdClose } from 'react-icons/md';
 
@@ -10,6 +10,15 @@ interface TimelineItem {
   images: string[];
   skill: string[];
   projectinfo: string[][];
+}
+
+declare global {
+  interface Window {
+    fullpage_api?: {
+      setAllowScrolling: (allow: boolean) => void;
+      setKeyboardScrolling: (allow: boolean) => void;
+    };
+  }
 }
 
 function Timeline() {
@@ -26,6 +35,19 @@ function Timeline() {
   const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0);
   const [toolOver, setToolOver] = useState(false);
 
+  // 📌 모달 열림/닫힘에 따라 fullpage 스크롤을 막는 useEffect
+  useEffect(() => {
+    if (window.fullpage_api) {
+      if (isModalOpen) {
+        window.fullpage_api.setAllowScrolling(false);
+        window.fullpage_api.setKeyboardScrolling(false);
+      } else {
+        window.fullpage_api.setAllowScrolling(true);
+        window.fullpage_api.setKeyboardScrolling(true);
+      }
+    }
+  }, [isModalOpen]);
+
   const timelineData: TimelineItem[] = [
     {
       date: '2023.03 ~ 2024.04',
@@ -41,11 +63,16 @@ function Timeline() {
         [
           '- 웹 퍼블리싱 총괄: 구조 설계부터 디자인 구현까지 사용자 경험 중심 개발',
           '- 메인 페이지 개선: BootStrap을 활용한 동적 배너 구현',
-          '- 인터랙션 강화: Swiper 라이브러리로 게임 아이템 슬라이드 기능 추가',
+          '- 반응형 디자인: 웹·태블릿·모바일 환경 최적화',
+          '- 기능 개발: JavaScript로 커스텀슬라이드 구현',
+        ],
+        [
+          '- 웹 퍼블리싱 총괄: 구조 설계부터 디자인 구현까지 사용자 경험 중심 개발',
+          '- 메인 페이지 개선: BootStrap을 활용한 동적 배너 구현',
+          '- 인터랙션 강화: Swiper 라이브러리로 리스트 슬라이드 기능 추가',
           '- 반응형 디자인: 웹·태블릿·모바일 환경 최적화',
           '- 기능 개발: JavaScript로 검색 및 게임 머니 변환 기능 구현',
         ],
-        [],
       ],
     },
     {
@@ -67,10 +94,34 @@ function Timeline() {
       images: [
         '/assets/timeline/no.png',
         '/assets/timeline/no.png',
-        '/assets/timeline/no.png',
-        '/assets/timeline/no.png',
+        '/assets/timeline/clush_time_3.png',
+        '/assets/timeline/clush_time_4.png',
       ],
-      projectinfo: [['- 테스트입니다.', '- 테스트입니다.', '- 테스트입니다.'], []],
+      projectinfo: [
+        [
+          '- 웹,태블릿, 모바일 퍼블리싱 전체 진행 ',
+          '- 미디어 뷰를 위한 일관성 뷰 퍼블리싱',
+          '- 상태관리로 인해 미디어 컨트롤 조정(미디어 플레이,볼륨 조절, pip 모드 등).',
+        ],
+        [
+          '- 웹,태블릿, 모바일 퍼블리싱 전체 운영 관리',
+          '- 2만줄 가량 글로벌스타일 공통 코드 모듈화 진행(웹,태블릿,모바일,desktop,ios) ',
+          '- 모듈 관리를 위한 기존 글로벌스타일 코드 컴포넌트 단위 분리 및 재사용성 증대',
+        ],
+        [
+          '- 웹,태블릿, 모바일 퍼블리싱',
+          '- 테이블 스타일 리스트 형식으로 커스텀 스타일링',
+          '- chart.js 사용하여 데이터 시각화',
+          '- 스토리북 도입하여 공통 컴포넌트 제작 및 재사용성 증대 ',
+          '- 접근성을 고려한 UI/UX 개선',
+        ],
+        [
+          '- 위 워크비 프로젝트와 동일 프로젝트(자사 버전 업그레이드)',
+          '- 웹,태블릿, 모바일 퍼블리싱 전체 운영 관리',
+          '- 2만줄 가량 글로벌스타일 공통 코드 모듈화 진행(웹,태블릿,모바일,desktop,ios) ',
+          '- 모듈 관리를 위한 기존 글로벌스타일 코드 컴포넌트 단위 분리 및 재사용성 증대',
+        ],
+      ],
     },
   ];
 

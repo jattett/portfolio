@@ -97,7 +97,6 @@ const StyledSlider = styled.div`
       background-color: #cdcdcd;
       width: 70vw;
       height: 55vh;
-      margin-bottom: 20px;
       border-radius: 20px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
@@ -121,6 +120,22 @@ const StyledSlider = styled.div`
         font-size: var(--font-lg);
         font-size: 1rem;
         color: #fff;
+      }
+    }
+  }
+  @media screen and (max-width: 768px) {
+    padding: 40px 20px;
+    height: auto;
+    min-height: 60vh;
+    .slide {
+      gap: 40px;
+      .fp-overflow {
+        justify-content: center;
+        gap: 40px;
+      }
+      img {
+        width: 100%;
+        height: 300px;
       }
     }
   }
@@ -156,13 +171,19 @@ const Modal = styled.div`
     box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
     width: 100%;
     max-width: 60vw;
-    height: 70vh;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding: 60px 50px;
     position: relative;
     transition: all 0.3s ease-in-out;
+    opacity: 0;
+    overflow: hidden;
+    max-height: 700px;
+    height: 100%;
+    padding: 30px;
+    &.open {
+      opacity: 1;
+    }
     .modal-detail-title {
       h3 {
         font-size: 2rem;
@@ -182,6 +203,12 @@ const Modal = styled.div`
         }
       }
       .slick-arrow {
+        &.slick-next {
+          right: -30px;
+        }
+        &.slick-prev {
+          left: -30px;
+        }
         &::before {
           color: #fff;
           font-size: 26px;
@@ -193,21 +220,29 @@ const Modal = styled.div`
       font-size: 1rem;
     }
     .info-area {
-      display: flex;
-      justify-content: space-between;
+      display: grid;
       align-items: flex-start;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      overflow: auto;
+      padding: 20px;
       .skill-area {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: flex-start;
         align-items: flex-start;
-        gap: 10px;
+        gap: 30px;
         h3 {
           color: #39ff14;
           text-shadow: 0 0 0px #39ff14, 0 0 17px #39ff14, 0 0 0px #39ff14, 0 0 8px #39ff14, 0 0 30px #32cd32,
             0 0 6px #228b22;
         }
-        p {
+        ul {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: flex-start;
+          gap: 10px;
           color: #fff;
           text-align: left;
         }
@@ -226,6 +261,13 @@ const Modal = styled.div`
         ul {
           color: #fff;
           text-align: left;
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          list-style: circle;
+          li {
+            line-height: 1.3;
+          }
         }
       }
     }
@@ -273,6 +315,12 @@ const Modal = styled.div`
         opacity: 0.8;
         &.github-button {
           font-size: 30px;
+          a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #39ff14;
+          }
         }
         &.play-button {
           font-size: 20px;
@@ -281,7 +329,38 @@ const Modal = styled.div`
           color: #000;
           background-color: #39ff14;
           box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
+          a {
+            color: #000;
+          }
         }
+      }
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .modal-content {
+      max-width: initial;
+      .content-area {
+        width: 100%;
+        .slick-list {
+          img {
+            height: 250px;
+          }
+        }
+        .slick-arrow {
+          &::before {
+            color: #000;
+          }
+          &.slick-next {
+            right: -10px;
+          }
+          &.slick-prev {
+            left: -10px;
+          }
+        }
+      }
+      .info-area {
+        display: flex;
+        flex-direction: column;
       }
     }
   }

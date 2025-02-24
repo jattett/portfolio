@@ -69,6 +69,30 @@ const Styled = styled.div`
       }
     }
   }
+  @media screen and (max-width: 768px) {
+    gap: 40px;
+    .section-wrapper {
+      width: 70%;
+      display: flex;
+      flex-direction: column-reverse;
+      .img-section {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+      }
+      .info-section {
+        h1 {
+          font-size: 16px;
+        }
+        b {
+          font-size: 16px;
+        }
+        p {
+          font-size: 14px;
+        }
+      }
+    }
+  }
 `;
 
 const NeonBorder = styled.div`
@@ -97,6 +121,16 @@ const NeonBorder = styled.div`
     border-right: 2px solid #39ff14;
     animation: ${Typing} 4s steps(30) 1 normal both, ${Blink} 0.5s step-end infinite;
     padding: 10px;
+  }
+  @media screen and (max-width: 768px) {
+    width: 80%;
+    padding: 20px;
+    font-size: 16px;
+    p {
+      white-space: normal;
+      animation: none;
+      border-right: none;
+    }
   }
 `;
 

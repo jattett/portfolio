@@ -3,7 +3,7 @@ import Header from '../../components/header';
 import Styled from './Styled';
 import FirstContents from '../FirstContents';
 import Info from '../Info';
-import Contact from '../Contact';
+import Contact from '../Contact';
 import Project from '../Project';
 import Timeline from '../Timeline';
 import ReactFullpage from '@fullpage/react-fullpage';

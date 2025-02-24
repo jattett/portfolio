@@ -282,6 +282,7 @@ const Styled = styled.div`
             color: #8c8c8c;
             transition: all 0.3s ease-in;
             list-style: square;
+            line-height: 1.3;
             cursor: pointer;
             &:hover {
               text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14;
@@ -363,6 +364,53 @@ const Styled = styled.div`
 
   .drawer-content ul li {
     margin-bottom: 8px;
+  }
+  @media screen and (max-width: 768px) {
+    .timeline-container {
+      .contents-wrapper {
+        .title-wrapper {
+          .timeline-title {
+            font-size: 21px;
+          }
+        }
+        .timeline {
+          margin-top: 80px;
+          &::before {
+            display: none;
+          }
+          .timeline-item {
+            .timeline-date {
+              width: 100%;
+              text-align: center;
+              top: -60%;
+              font-size: 16px;
+            }
+          }
+        }
+      }
+    }
+    .modal-content {
+      width: 100%;
+      height: 100%;
+      padding: 30px;
+      max-height: 70vh;
+      overflow: auto;
+      .modal-detail-header {
+        .modal-detail-title {
+          h3 {
+            font-size: 16px;
+          }
+          p {
+            font-size: 14px;
+          }
+        }
+      }
+      .project-info {
+        flex-direction: column;
+        justify-content: flex-start;
+        height: auto;
+      }
+    }
   }
 `;
 

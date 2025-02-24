@@ -139,6 +139,31 @@ const Styled = styled.div`
   .face-right {
     transform: rotateY(90deg) translateZ(215px);
   }
+
+  @media screen and (max-width: 768px) {
+    .scene {
+      width: 200px;
+      height: 200px;
+      perspective: 1200px;
+    }
+    .face-front {
+      transform: rotateY(0deg) translateZ(115px);
+    }
+    .face-back {
+      transform: rotateY(180deg) translateZ(115px);
+    }
+    .face-left {
+      transform: rotateY(-90deg) translateZ(115px);
+    }
+    .face-right {
+      transform: rotateY(90deg) translateZ(115px);
+    }
+    .cube-face {
+      p {
+        font-size: 16px;
+      }
+    }
+  }
 `;
 
 export default Styled;

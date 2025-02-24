@@ -107,6 +107,73 @@ const HeaderStyled = styled.div`
         }
       }
     }
+    .hamburger-button {
+      display: none; /* 기본적으로 PC에서는 숨김 */
+      background: none;
+      border: none;
+      color: #39ff14;
+      text-shadow: 0 0 0px #39ff14, 0 0 17px #39ff14, 0 0 0px #39ff14, 0 0 8px #39ff14, 0 0 30px #32cd32,
+        0 0 6px #228b22;
+      cursor: pointer;
+    }
+  }
+  /* 모바일 드로어 */
+  .mobile-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 240px;
+    height: 100vh;
+    background: #222;
+    transform: translateX(100%); /* 기본적으로 오른쪽 밖에 숨김 */
+    transition: transform 0.3s ease-in-out;
+    z-index: 999;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+
+    .drawer-close {
+      margin-left: auto; /* 오른쪽 정렬 */
+      background: none;
+      border: none;
+      color: #39ff14;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style: none;
+      width: 100%;
+    }
+    li {
+      padding: 10px 0;
+      cursor: pointer;
+      border-bottom: 1px solid #fff;
+      transition: color 0.2s;
+      color: #39ff14;
+      text-shadow: 0 0 0px #39ff14, 0 0 17px #39ff14, 0 0 0px #39ff14, 0 0 8px #39ff14, 0 0 30px #32cd32,
+        0 0 6px #228b22;
+    }
+  }
+
+  /* 드로어가 열렸을 때 */
+  .mobile-drawer.open {
+    transform: translateX(0);
+  }
+
+  @media screen and (max-width: 768px) {
+    .header-wrapper {
+      nav {
+        ul {
+          display: none;
+        }
+      }
+      .hamburger-button {
+        display: flex;
+      }
+    }
   }
 `;
 
