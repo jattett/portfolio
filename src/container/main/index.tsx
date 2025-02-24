@@ -37,7 +37,7 @@ function Main() {
         navigationTooltips={tooltips}
         credits={{ enabled: false }}
         normalScrollElements=".custom-slider"
-        afterLoad={(origin, destination) => {
+        afterLoad={(_origin, destination) => {
           setActiveSection(String(destination.anchor));
         }}
         render={({ fullpageApi }) => {
