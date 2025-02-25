@@ -126,18 +126,27 @@ const StyledSlider = styled.div`
   @media screen and (max-width: 768px) {
     padding: 40px 20px;
     height: auto;
-    min-height: 60dvh;
+    min-height: 70dvh;
     .slide {
       gap: 40px;
+      .click-text {
+        font-size: 14px;
+      }
       .fp-overflow {
-        justify-content: center;
+        justify-content: flex-start;
         gap: 40px;
       }
       img {
         width: 100%;
-        height: 300px;
+        height: 200px;
       }
     }
+  }
+  .fp-next {
+    top: 45%;
+  }
+  .fp-prev {
+    top: 45%;
   }
 `;
 
@@ -226,6 +235,9 @@ const Modal = styled.div`
       gap: 20px;
       overflow: auto;
       padding: 20px;
+      &::-webkit-scrollbar {
+        display: none;
+      }
       .skill-area {
         display: flex;
         flex-direction: row;
@@ -345,6 +357,10 @@ const Modal = styled.div`
   @media screen and (max-width: 768px) {
     .modal-content {
       max-width: initial;
+      padding-top: 70px;
+      .close-button {
+        top: 50px;
+      }
       .content-area {
         width: 100%;
         .slick-list {
@@ -353,6 +369,7 @@ const Modal = styled.div`
           }
         }
         .slick-arrow {
+          z-index: 1;
           &::before {
             color: #000;
           }
@@ -367,6 +384,7 @@ const Modal = styled.div`
       .info-area {
         display: flex;
         flex-direction: column;
+        padding: 20px 0 40px;
       }
     }
   }

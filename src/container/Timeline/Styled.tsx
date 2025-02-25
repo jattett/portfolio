@@ -367,6 +367,7 @@ const Styled = styled.div`
   }
   @media screen and (max-width: 768px) {
     .timeline-container {
+      width: 95vw;
       .contents-wrapper {
         .title-wrapper {
           .timeline-title {
@@ -394,28 +395,39 @@ const Styled = styled.div`
         }
       }
     }
-    .modal-content {
-      width: 100%;
+    .modal {
       height: 100%;
-      padding: 30px;
-      max-height: 70dvh;
-      overflow: auto;
-      .modal-detail-header {
-        .modal-detail-title {
-          h3 {
-            font-size: 16px;
+      .modal-content {
+        width: auto;
+        height: auto;
+        padding: 30px;
+        max-height: 100dvh;
+        overflow: auto;
+        .modal-detail-header {
+          .modal-detail-title {
+            h3 {
+              font-size: 16px;
+            }
+            p {
+              font-size: 14px;
+            }
           }
-          p {
-            font-size: 14px;
+        }
+        .project-info {
+          flex-direction: column;
+          justify-content: flex-start;
+          height: auto;
+          .index-result-wrapper {
+            justify-content: center;
+            align-items: flex-start;
+            position: relative;
           }
         }
       }
-      .project-info {
-        flex-direction: column;
-        justify-content: flex-start;
-        height: auto;
-      }
     }
+  }
+  .drawer {
+    width: 200px;
   }
 `;
 

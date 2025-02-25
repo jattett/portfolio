@@ -70,15 +70,15 @@ const Styled = styled.div`
     }
   }
   @media screen and (max-width: 768px) {
-    gap: 40px;
+    gap: 20px;
     .section-wrapper {
-      width: 70%;
+      width: 80%;
       display: flex;
       flex-direction: column-reverse;
       overflow: auto;
       .img-section {
-        width: 200px;
-        height: 200px;
+        width: 150px;
+        height: 150px;
         margin: 0 auto;
       }
       .info-section {
@@ -124,6 +124,7 @@ const NeonBorder = styled.div`
     padding: 10px;
   }
   @media screen and (max-width: 768px) {
+    display: none;
     width: 80%;
     padding: 20px;
     font-size: 16px;
