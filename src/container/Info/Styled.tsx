@@ -75,6 +75,7 @@ const Styled = styled.div`
       width: 70%;
       display: flex;
       flex-direction: column-reverse;
+      overflow: auto;
       .img-section {
         width: 200px;
         height: 200px;

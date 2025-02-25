@@ -42,7 +42,7 @@ const projects = [
     title: '맛운로드(UI 변경중)',
     description: 'React와 Kakao Map API 를 활용 하여 만든, 맛집 찾기, 종합운동장 찾기 서비스 입니다.(UI 개선중)',
     mainimage: '/assets/project/no_UIUX.png',
-    images: ['/assets/project/no_UIUX.png', '/assets/project/no_UIUX.png'],
+    images: ['/assets/project/no_UIUX.png'],
     subdescription: [
       ['카카오 맵 API를 활용하여 사용자의 음식 취향에 맞는 맛집을 추천·지도에 표시하는 서비스입니다.'],
       [
