@@ -32,18 +32,18 @@ const pulseBoxShadow = keyframes`
 
 const Styled = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   background-color: var(--black-color);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10vh;
+  gap: 10dvh;
 `;
 
 const StyledSlider = styled.div`
   width: 85vw;
-  height: 80vh;
+  height: 80dvh;
   background-color: #000;
   border-radius: 20px;
   display: flex;
@@ -96,7 +96,7 @@ const StyledSlider = styled.div`
     img {
       background-color: #cdcdcd;
       width: 70vw;
-      height: 55vh;
+      height: 55dvh;
       border-radius: 20px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
@@ -126,7 +126,7 @@ const StyledSlider = styled.div`
   @media screen and (max-width: 768px) {
     padding: 40px 20px;
     height: auto;
-    min-height: 60vh;
+    min-height: 60dvh;
     .slide {
       gap: 40px;
       .fp-overflow {
@@ -155,12 +155,12 @@ const Modal = styled.div`
   &.open {
     transition: all 0.3s ease-in-out;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     opacity: 1;
   }
   &.close {
     width: 0vw;
-    height: 0vh;
+    height: 0dvh;
   }
 
   .modal-content {
@@ -198,7 +198,7 @@ const Modal = styled.div`
       .slick-list {
         img {
           width: 100%;
-          height: 40vh;
+          height: 40dvh;
           border-radius: 20px;
         }
       }

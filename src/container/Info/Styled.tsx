@@ -17,13 +17,13 @@ const Blink = keyframes`
 
 const Styled = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   background-color: var(--black-color);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10vh;
+  gap: 10dvh;
 
   .section-wrapper {
     box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
@@ -34,7 +34,7 @@ const Styled = styled.div`
     position: relative;
     background-color: #000;
     width: 80vw;
-    min-height: 40vh;
+    min-height: 40dvh;
     padding: 30px 40px;
     grid-template-columns: 1.5fr 0.5fr;
     gap: 40px;

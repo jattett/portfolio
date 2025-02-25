@@ -54,16 +54,16 @@ const modalClose = keyframes`
 
 const Styled = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   background-color: var(--black-color);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10vh;
+  gap: 10dvh;
   .timeline-container {
     width: 85vw;
-    height: 80vh;
+    height: 80dvh;
     margin: 0 auto;
     background-color: #000;
     color: white;
@@ -102,12 +102,12 @@ const Styled = styled.div`
         margin: 0;
         padding: 0;
         list-style: none;
-        height: 55vh;
+        height: 55dvh;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         margin-top: 50px;
-        gap: 10vh;
+        gap: 10dvh;
 
         &::before {
           content: '';
@@ -184,7 +184,7 @@ const Styled = styled.div`
     transition: all 0.3s ease-in-out;
     &.open {
       width: 100vw;
-      height: 100vh;
+      height: 100dvh;
     }
     &.close {
       width: 0vw;
@@ -198,7 +198,7 @@ const Styled = styled.div`
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     z-index: 2;
     width: 50vw;
-    height: 60vh;
+    height: 60dvh;
     border-radius: 20px;
     animation: ${modalOpen} 0.3s ease-in-out;
     position: relative;
@@ -314,7 +314,7 @@ const Styled = styled.div`
         }
         .project-image {
           width: 300px;
-          height: 40vh;
+          height: 40dvh;
           border-radius: 20px;
           overflow: hidden;
           background: #cdcdcd;
@@ -331,7 +331,7 @@ const Styled = styled.div`
     top: 0;
     right: -100%; /* 기본적으로 숨김 */
     width: 300px;
-    height: 100vh;
+    height: 100dvh;
     background: #000;
     color: white;
     transition: right 0.3s ease-in-out;
@@ -386,6 +386,11 @@ const Styled = styled.div`
               font-size: 16px;
             }
           }
+          .timeline-content {
+            h2 {
+              font-size: 16px;
+            }
+          }
         }
       }
     }
@@ -393,7 +398,7 @@ const Styled = styled.div`
       width: 100%;
       height: 100%;
       padding: 30px;
-      max-height: 70vh;
+      max-height: 70dvh;
       overflow: auto;
       .modal-detail-header {
         .modal-detail-title {

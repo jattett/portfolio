@@ -123,7 +123,7 @@ const HeaderStyled = styled.div`
     top: 0;
     right: 0;
     width: 240px;
-    height: 100vh;
+    height: 100dvh;
     background: #222;
     transform: translateX(100%); /* 기본적으로 오른쪽 밖에 숨김 */
     transition: transform 0.3s ease-in-out;

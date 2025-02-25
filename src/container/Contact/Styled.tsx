@@ -26,13 +26,13 @@ const fadeInfinity = keyframes`
 
 const Styled = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: var(--black-color);
   flex-direction: column;
-  gap: 10vh;
+  gap: 10dvh;
 
   .contact-title {
     display: flex;

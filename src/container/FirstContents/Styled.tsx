@@ -44,7 +44,7 @@ const arrowBounce = keyframes`
 
 const Styled = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   background-color: var(--black-color);
   display: flex;
   align-items: center;
