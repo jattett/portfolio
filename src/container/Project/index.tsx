@@ -39,7 +39,7 @@ const projects = [
   },
   {
     id: 2,
-    title: 'EchoMind',
+    title: 'EchoMind(개발중 , 현재 업로드 기능만 활성화)',
     description: 'React와 AI 기술을 활용하여 음성 녹음, 텍스트 변환 및 감정 분석을 제공하는 웹 애플리케이션입니다.',
     mainimage: '/assets/project/echomind_1.png',
     images: [
