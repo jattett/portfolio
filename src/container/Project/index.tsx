@@ -39,6 +39,34 @@ const projects = [
   },
   {
     id: 2,
+    title: 'EchoMind',
+    description: 'React와 AI 기술을 활용하여 음성 녹음, 텍스트 변환 및 감정 분석을 제공하는 웹 애플리케이션입니다.',
+    mainimage: '/assets/project/echomind_1.png',
+    images: [
+      '/assets/project/echomind_1.png',
+      '/assets/project/echomind_2.png',
+      '/assets/project/echomind_3.png',
+      '/assets/project/echomind_4.png',
+    ],
+    subdescription: [
+      ['웹에서 직접 음성을 녹음하고 AI를 활용하여 텍스트 변환 및 분석을 수행하는 프로젝트입니다.'],
+      ['AssemblyAI API를 사용하여 녹음된 음성을 텍스트로 변환하고, 화자 분리 기능을 통해 대화를 분석합니다.'],
+      ['Gemini AI API를 이용하여 대화에서 자주 사용하는 단어, 말투, 감정 분석을 수행하고 시각화합니다.'],
+      [
+        'Recharts를 이용해 감정 분석 데이터를 차트로 시각적으로 표현하여 사용자가 쉽게 이해할 수 있도록 설계하였습니다.',
+      ],
+      [
+        'Styled-Components와 React Icons을 활용하여 사용자 친화적인 UI/UX를 제공하고, 인터랙티브한 디자인을 구현했습니다.',
+      ],
+      ['Vite와 TypeScript를 기반으로 최적화된 개발 환경을 구축하여 빠른 빌드 및 코드 안정성을 확보하였습니다.'],
+      ['녹음 및 파일 업로드 기능이 동시에 활성화되지 않도록 UX를 개선하여 사용성을 향상시켰습니다.'],
+    ],
+    skill: 'React, TypeScript, Vite, SCSS, AssemblyAI API, Gemini AI API, Recharts, Styled-Components, React Icons',
+    githublink: 'https://github.com/jattett/separation_test',
+    playlink: 'https://separation-test.vercel.app/',
+  },
+  {
+    id: 3,
     title: '맛운로드(UI 변경중)',
     description: 'React와 Kakao Map API 를 활용 하여 만든, 맛집 찾기, 종합운동장 찾기 서비스 입니다.(UI 개선중)',
     mainimage: '/assets/project/no_UIUX.png',
@@ -58,7 +86,7 @@ const projects = [
     playlink: 'https://jattett.github.io/other/',
   },
   {
-    id: 3,
+    id: 4,
     title: '포트폴리오 사이트',
     description: 'Vite, React, TypeScript를 사용하여 인터렉션을 중점적으로 만든 사이트 입니다.',
     mainimage: '/assets/project/potpol_project.png',
@@ -75,7 +103,7 @@ const projects = [
     playlink: 'https://portfolio-4vhc.vercel.app/',
   },
   {
-    id: 4,
+    id: 5,
     title: 'Your Trip',
     description: 'React를 활용하여 공공 데이터 API로 만든 전국 여행지 추천 서비스입니다.',
     mainimage: '/assets/project/yourtrip_project.png',
