@@ -1,34 +1,4 @@
-import styled, { keyframes } from 'styled-components';
-
-const pulseBoxShadow = keyframes`
-  0% {
-    box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
-  }
-  50% {
-    box-shadow: 0 0 20px #39ff14, 0 0 40px #39ff14, 0 0 60px #39ff14;
-  }
-  100% {
-    box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
-  }
-`;
-
-const fadeInfinity = keyframes`
-  0% {
-    opacity: 1;
-  }
-  15% {
-    opacity: 0;
-  }
-  25% {
-    opacity: 1;
-  }
-  30% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-`;
+import styled from 'styled-components';
 
 const modalOpen = keyframes`
   0% {
@@ -69,7 +39,6 @@ const Styled = styled.div`
     color: white;
     border-radius: 20px;
     box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
-    animation: ${pulseBoxShadow} 3s infinite;
 
     .contents-wrapper {
       padding: 50px;
@@ -92,7 +61,6 @@ const Styled = styled.div`
           font-size: 16px;
           text-align: center;
           text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14;
-          animation: ${fadeInfinity} 5s infinite;
         }
       }
 
@@ -200,13 +168,8 @@ const Styled = styled.div`
     width: 50vw;
     height: 60dvh;
     border-radius: 20px;
-    animation: ${modalOpen} 0.3s ease-in-out;
     position: relative;
     box-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
-
-    &.close {
-      animation: ${modalClose} 0.3s ease-in-out;
-    }
 
     .modal-close {
       position: absolute;
@@ -304,9 +267,7 @@ const Styled = styled.div`
         justify-content: flex-start;
         align-items: center;
         position: relative;
-        .index-result-subtitle {
-          animation: ${fadeInfinity} 5s infinite;
-        }
+
         p {
           text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14;
           color: #39ff14;
