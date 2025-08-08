@@ -90,6 +90,89 @@ body:not(.fp-responsive) .fp-overflow {
       color: #fff;
     }
   }
+
+  /* 마우스 커서 효과 애니메이션 */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) scale(1);
+    }
+    50% {
+      transform: translateY(-3px) scale(1.1);
+    }
+  }
+
+  @keyframes trail {
+    0% {
+      transform: translate(0, 0) scale(1);
+      opacity: 0.3;
+    }
+    100% {
+      transform: translate(10px, -10px) scale(0.5);
+      opacity: 0;
+    }
+  }
+
+  .small-droplet {
+    animation: float 2s ease-in-out infinite;
+  }
+
+  .droplet-0 {
+    animation-delay: 0s;
+  }
+
+  .droplet-1 {
+    animation-delay: 0.5s;
+  }
+
+  .droplet-2 {
+    animation-delay: 1s;
+  }
+
+  .trail-droplet {
+    animation: trail 1s ease-out infinite;
+  }
+
+  .trail-0 {
+    animation-delay: 0s;
+  }
+
+  .trail-1 {
+    animation-delay: 0.2s;
+  }
+
+  .trail-2 {
+    animation-delay: 0.4s;
+  }
+
+  .trail-3 {
+    animation-delay: 0.6s;
+  }
+
+  .trail-4 {
+    animation-delay: 0.8s;
+  }
+
+  /* 기본 스크롤바 숨기기 */
+  ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
+
+  /* 포커스 아웃라인 제거 */
+  *:focus {
+    outline: none;
+  }
+
+  /* 선택 텍스트 스타일 */
+  ::selection {
+    background: var(--green-color);
+    color: var(--black-color);
+  }
+
+  /* 스무스 스크롤 */
+  html {
+    scroll-behavior: smooth;
+  }
 `;
 
 export default GlobalStyle;

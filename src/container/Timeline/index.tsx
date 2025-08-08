@@ -1,222 +1,255 @@
 import { useState, useEffect } from 'react';
-import Styled from './Styled';
+import { motion, AnimatePresence } from 'framer-motion';
 import { MdClose } from 'react-icons/md';
+import Styled from './Styled';
+import { globalModalState } from '../main';
 
-interface TimelineItem {
-  date: string;
-  title: string;
+interface Project {
+  name: string;
   description: string;
-  info: string[];
-  images: string[];
-  skill: string[];
-  projectinfo: string[][];
+  skills: string[];
+  details: string[];
 }
 
-declare global {
-  interface Window {
-    fullpage_api?: {
-      setAllowScrolling: (allow: boolean) => void;
-      setKeyboardScrolling: (allow: boolean) => void;
-    };
-  }
+interface TimelineItem {
+  id: number;
+  year: string;
+  title: string;
+  company: string;
+  description: string;
+  projects: Project[];
 }
 
 function Timeline() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState<TimelineItem>({
-    title: '',
-    description: '',
-    date: '',
-    skill: [],
-    info: [],
-    images: [],
-    projectinfo: [],
-  });
-  const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0);
-  const [toolOver, setToolOver] = useState(false);
+  const [modalContent, setModalContent] = useState<TimelineItem | null>(null);
 
-  // 📌 모달 열림/닫힘에 따라 fullpage 스크롤을 막는 useEffect
-  useEffect(() => {
-    if (window.fullpage_api) {
-      if (isModalOpen) {
-        window.fullpage_api.setAllowScrolling(false);
-        window.fullpage_api.setKeyboardScrolling(false);
-      } else {
-        window.fullpage_api.setAllowScrolling(true);
-        window.fullpage_api.setKeyboardScrolling(true);
-      }
+  const timelineData = [
+    {
+      id: 1,
+      year: '2024',
+      title: '프론트엔드 개발자',
+      company: '스타트업',
+      description: 'React, TypeScript를 활용한 웹 애플리케이션 개발',
+      projects: [
+        {
+          name: '관리자 대시보드',
+          description: 'React와 TypeScript를 사용한 관리자 대시보드 개발',
+          skills: ['React', 'TypeScript', 'Styled-Components'],
+          details: [
+            '사용자 관리 및 권한 시스템 구현',
+            '실시간 데이터 시각화 차트 개발',
+            '반응형 디자인 적용'
+          ]
+        },
+        {
+          name: '모바일 웹 앱',
+          description: 'PWA 기술을 활용한 모바일 웹 애플리케이션',
+          skills: ['PWA', 'React', 'Service Worker'],
+          details: [
+            '오프라인 기능 구현',
+            '푸시 알림 시스템 개발',
+            '모바일 최적화 성능 개선'
+          ]
+        }
+      ]
+    },
+    {
+      id: 2,
+      year: '2023',
+      title: '웹 개발자',
+      company: 'IT 회사',
+      description: '다양한 웹 프로젝트 참여 및 기술 스택 확장',
+      projects: [
+        {
+          name: '이커머스 플랫폼',
+          description: 'Next.js를 활용한 대규모 이커머스 사이트 개발',
+          skills: ['Next.js', 'Node.js', 'MongoDB'],
+          details: [
+            'SSR/SSG 최적화로 성능 향상',
+            '결제 시스템 연동',
+            'SEO 최적화 구현'
+          ]
+        }
+      ]
+    },
+    {
+      id: 3,
+      year: '2022',
+      title: '신입 개발자',
+      company: '소프트웨어 회사',
+      description: '웹 개발 기초 학습 및 첫 프로젝트 참여',
+      projects: [
+        {
+          name: '포트폴리오 웹사이트',
+          description: '개인 포트폴리오 웹사이트 개발',
+          skills: ['HTML', 'CSS', 'JavaScript'],
+          details: [
+            '반응형 웹 디자인 구현',
+            '애니메이션 효과 추가',
+            '접근성 개선'
+          ]
+        }
+      ]
     }
-  }, [isModalOpen]);
-
-  const timelineData: TimelineItem[] = [
-    {
-      date: '2023.03 ~ 2024.04',
-      title: '리비에라 소프트 / 빅독',
-      description: '프론트엔드 및 퍼블리셔',
-      info: [
-        '자사 서비스 페이지 유지보수 - 기존 UI 개선 및 성능 최적화 진행',
-        '자사 서비스 페이지 구축 - 신규 페이지 개발 및 반응형 디자인 적용',
-      ],
-      skill: ['Html, CSS, JavaScript', 'Html, CSS, JavaScript, Sass'],
-      images: ['/assets/timeline/bigdog.png', '/assets/timeline/stone.png'],
-      projectinfo: [
-        [
-          '- 웹 퍼블리싱 총괄: 구조 설계부터 디자인 구현까지 사용자 경험 중심 개발',
-          '- 메인 페이지 개선: BootStrap을 활용한 동적 배너 구현',
-          '- 반응형 디자인: 웹·태블릿·모바일 환경 최적화',
-          '- 기능 개발: JavaScript로 커스텀슬라이드 구현',
-        ],
-        [
-          '- 웹 퍼블리싱 총괄: 구조 설계부터 디자인 구현까지 사용자 경험 중심 개발',
-          '- 메인 페이지 개선: BootStrap을 활용한 동적 배너 구현',
-          '- 인터랙션 강화: Swiper 라이브러리로 리스트 슬라이드 기능 추가',
-          '- 반응형 디자인: 웹·태블릿·모바일 환경 최적화',
-          '- 기능 개발: JavaScript로 검색 및 게임 머니 변환 기능 구현',
-        ],
-      ],
-    },
-    {
-      date: '2024.04 ~ 현재',
-      title: '(주)클러쉬',
-      description: '프론트엔드 및 퍼블리셔',
-      info: [
-        'SK 하이닉스 스마트 쿠키 숏폼 퍼블리싱 및 프론트개발 - 모션 효과 미디어 재생 및 반응형 UI 구현',
-        'KB국민은행 협업 플랫폼 "워크비" 퍼블리싱 운영 및 프론트개발 - UI 최적화 및 신규 기능 퍼블리싱',
-        '우리은행 데이터 포털 프론트개발 - 데이터 시각화 및 접근성 개선',
-        '자사서비스 Clush 워크플레이스 협업툴 개발 - 신규 기능 개발 및 UI/UX 개선',
-      ],
-      skill: [
-        'React,Styled-components,JavaScript',
-        'React,Styled-components,JavaScript',
-        'React,Styled-components,Antd,JavaScript,chart.js,Storybook',
-        'React,Styled-components,Antd,JavaScript',
-      ],
-      images: [
-        '/assets/timeline/no.png',
-        '/assets/timeline/no.png',
-        '/assets/timeline/clush_time_3.png',
-        '/assets/timeline/clush_time_4.png',
-      ],
-      projectinfo: [
-        [
-          '- 웹,태블릿, 모바일 퍼블리싱 전체 진행 ',
-          '- 미디어 뷰를 위한 일관성 뷰 퍼블리싱',
-          '- 상태관리로 인해 미디어 컨트롤 조정(미디어 플레이,볼륨 조절, pip 모드 등).',
-        ],
-        [
-          '- 웹,태블릿, 모바일 퍼블리싱 전체 운영 관리',
-          '- 2만줄 가량 글로벌스타일 공통 코드 모듈화 진행(웹,태블릿,모바일,desktop,ios) ',
-          '- 모듈 관리를 위한 기존 글로벌스타일 코드 컴포넌트 단위 분리 및 재사용성 증대',
-        ],
-        [
-          '- 웹,태블릿, 모바일 퍼블리싱',
-          '- 테이블 스타일 리스트 형식으로 커스텀 스타일링',
-          '- chart.js 사용하여 데이터 시각화',
-          '- 스토리북 도입하여 공통 컴포넌트 제작 및 재사용성 증대 ',
-          '- 접근성을 고려한 UI/UX 개선',
-        ],
-        [
-          '- 위 워크비 프로젝트와 동일 프로젝트(자사 버전 업그레이드)',
-          '- 웹,태블릿, 모바일 퍼블리싱 전체 운영 관리',
-          '- 2만줄 가량 글로벌스타일 공통 코드 모듈화 진행(웹,태블릿,모바일,desktop,ios) ',
-          '- 모듈 관리를 위한 기존 글로벌스타일 코드 컴포넌트 단위 분리 및 재사용성 증대',
-        ],
-      ],
-    },
   ];
 
-  // 📌 모달 열기 함수 (첫 번째 `li`와 이미지 기본 활성화)
   const openModal = (item: TimelineItem) => {
     setModalContent(item);
-    setSelectedImageIndex(0);
     setIsModalOpen(true);
+    globalModalState.openModal();
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
+    setModalContent(null);
+    globalModalState.closeModal();
   };
+
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    };
+
+    if (isModalOpen) {
+      document.addEventListener('keydown', handleEsc);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEsc);
+    };
+  }, [isModalOpen]);
+
+
 
   return (
     <Styled>
-      <div className="timeline-container">
+      <motion.div
+        className="timeline-container"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        onMouseEnter={() => globalModalState.setElementHover('timeline')}
+        onMouseLeave={() => globalModalState.setElementHover(null)}
+      >
         <div className="contents-wrapper">
-          <div className="title-wrapper">
-            <h1 className="timeline-title">My Timeline</h1>
-            <span>해당 타임라인을 클릭하시면 새 창이 열립니다.</span>
-          </div>
-          <div className="timeline">
+          <motion.div
+            className="timeline-title"
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <h1>My Timeline</h1>
+            <p>클릭하여 상세 정보를 확인하세요</p>
+          </motion.div>
+
+          <motion.div
+            className="timeline-content"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
             {timelineData.map((item, index) => (
-              <div key={index} className="timeline-item">
-                <div className="timeline-date">{item.date}</div>
-                <div className="timeline-content" onClick={() => openModal(item)}>
-                  <h2>{item.title}</h2>
+              <motion.div
+                key={item.id}
+                className="timeline-item"
+                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 + index * 0.2 }}
+                whileHover={{ scale: 1.05 }}
+                onClick={() => openModal(item)}
+                onMouseEnter={() => globalModalState.setElementHover('timeline-item')}
+                onMouseLeave={() => globalModalState.setElementHover(null)}
+              >
+                <div className="timeline-marker" />
+                <div className="timeline-content-wrapper">
+                  <div className="timeline-year">{item.year}</div>
+                  <div className="timeline-info">
+                    <h3>{item.title}</h3>
+                    <h4>{item.company}</h4>
+                    <p>{item.description}</p>
+                  </div>
                 </div>
-              </div>
+                <span className="click-hint">클릭하여 상세 정보를 확인하세요</span>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </div>
 
-      {isModalOpen && (
-        <div className={`modal ${isModalOpen ? 'open' : ''}`} onClick={closeModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={closeModal}>
-              <MdClose size="24" color="#FFF" />
-            </button>
-            <div className="modal-detail-header">
-              <div className="modal-detail-title">
-                <h3>{modalContent.title}</h3>
-                <p>{modalContent.date}</p>
-              </div>
-              <p className="description">{modalContent.description}</p>
-            </div>
-            <div className="project-info">
-              <div className="project-contents-wrapper">
-                <h3>진행 프로젝트</h3>
-                <ul>
-                  {modalContent.info.map((text, index) => (
-                    <li
-                      key={index}
-                      onClick={() => setSelectedImageIndex(index)}
-                      className={selectedImageIndex === index ? 'active' : ''}
-                    >
-                      {text}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="index-result-wrapper">
-                <p className="index-result-subtitle">이미지에 마우스를 올리면 상세 이력이 나와요</p>
-                <div className="project-image">
-                  {modalContent.images.length > 0 ? (
-                    <img
-                      src={modalContent.images[selectedImageIndex]}
-                      alt={`project-${selectedImageIndex}`}
-                      onMouseEnter={() => setToolOver(true)}
-                      onMouseLeave={() => setToolOver(false)}
-                    />
-                  ) : (
-                    <p>이미지가 없습니다.</p>
-                  )}
+        {/* Modal */}
+        <AnimatePresence>
+          {isModalOpen && modalContent && (
+            <motion.div
+              className="modal-overlay"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={closeModal}
+              style={{ zIndex: 9999 }}
+            >
+              <motion.div
+                className="modal-content"
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.8, opacity: 0 }}
+                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                onClick={(e) => e.stopPropagation()}
+                style={{ zIndex: 10000 }}
+                onMouseEnter={() => globalModalState.setElementHover('modal-content')}
+                onMouseLeave={() => globalModalState.setElementHover(null)}
+              >
+                <button className="modal-close" onClick={closeModal}>
+                  <MdClose />
+                </button>
+                
+                <div className="modal-header">
+                  <h2>{modalContent.title}</h2>
+                  <div className="modal-meta">
+                    <span className="modal-year">{modalContent.year}</span>
+                    <span className="modal-company">{modalContent.company}</span>
+                  </div>
+                  <p className="modal-description">{modalContent.description}</p>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
-      <div className={`drawer ${toolOver ? 'open' : ''}`}>
-        <div className="drawer-content">
-          <h4>프로젝트 상세 내용</h4>
-          <ul>
-            {modalContent.projectinfo[selectedImageIndex]?.map((info, idx) => (
-              <li key={idx}>{info}</li>
-            ))}
-          </ul>
-        </div>
-      </div>
+                <div className="modal-body">
+                  <h3>주요 프로젝트</h3>
+                  <div className="projects-list">
+                                         {modalContent.projects.map((project: Project, index: number) => (
+                      <div key={index} className="project-items">
+                        <div className="project-item">
+                          <div className="project-number">{index + 1}</div>
+                          <div className="project-text">
+                            <h4>{project.name}</h4>
+                            <p>{project.description}</p>
+                            <div className="project-skills">
+                              {project.skills.map((skill: string, skillIndex: number) => (
+                                <span key={skillIndex} className="skill-chip">{skill}</span>
+                              ))}
+                            </div>
+                            <div className="project-details">
+                              {project.details.map((detail: string, detailIndex: number) => (
+                                <div key={detailIndex} className="detail-item">
+                                  <span className="detail-bullet">•</span>
+                                  <span>{detail}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
     </Styled>
   );
 }
 
 export default Timeline;
+

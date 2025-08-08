@@ -79,7 +79,7 @@ const HeaderStyled = styled.div`
         gap: 30px;
         li {
           font-family: 'Press Start 2P', monospace;
-          font-size: var(--font-sd);
+          font-size: var(--font-md);
           position: relative;
           cursor: pointer;
           transition: 0.3s ease-in;

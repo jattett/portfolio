@@ -1,40 +1,129 @@
+import { motion } from 'framer-motion';
+import { MdCode, MdPalette, MdWork } from 'react-icons/md';
 import { Styled, NeonBorder } from './Styled';
-import ProfileImg from '../../../public/assets/me.jpg';
+import { globalModalState } from '../main';
 
-function FirstContents() {
+// Images under public should be referenced by absolute path
+const ProfileImg = '/assets/me.jpg';
+
+function Info() {
+  const experiences = [
+    {
+      icon: <MdCode />,
+      title: 'Frontend Development',
+      description: 'React, TypeScript, Styled-Components를 활용한 현대적인 웹 개발',
+    },
+    {
+      icon: <MdPalette />,
+      title: 'UI/UX Design',
+      description: '사용자 경험을 고려한 직관적이고 아름다운 인터페이스 설계',
+    },
+    {
+      icon: <MdWork />,
+      title: 'Problem Solving',
+      description: '복잡한 기술적 문제를 창의적이고 효율적으로 해결',
+    },
+  ];
+
   return (
     <Styled>
-      <NeonBorder>
-        <p>Building interactive experiences, one pixel at a time.</p>
-      </NeonBorder>
-      <div className="section-wrapper">
-        <div className="info-section">
-          <h1>
-            "어떻게 하면 <b>사용자가 더 편리하게 서비스를 사용할 수 있을까?</b>"
-          </h1>
-          <p>
-            안녕하세요! 프론트엔드 개발자 <b>강규민</b>입니다.
-            <br />
-            저는 여러 프로젝트를 통해 프론트엔드 개발의 기초부터 실제 구현까지 경험하며,
-            <br />웹 개발에 대한 폭넓은 이해를 쌓아왔습니다. 특히, <b>사용자 경험(UX)</b>을 최우선으로 생각하며,
-            <br />더 나은 사용성을 고민하며 코드를 작성하고 있습니다. 제가 생각하는 좋은 IT 서비스란,
-            <br />
-            기술적으로 뛰어난 것뿐만 아니라, <b>사용자 입장에서 쉽고 직관적으로</b> 느껴지는 서비스입니다.
-            <br />
-            이러한 철학을 바탕으로, <b>늘 사용자의 관점에서 문제를 정의하고 해결책을 제시</b>하려 노력하고 있습니다.
-            <br />
-            아직은 완벽하지 않지만, 작은 문제 하나도 끝까지 해결하려는 자세와 끊임없이 성장하려는 열정만큼은 누구보다
-            자신 있습니다.
-            <br />
-            저의 가능성을 믿고 함께 성장할 수 있는 팀에서 배우고 기여하고 싶습니다. 감사합니다.
-          </p>
+      <motion.div
+        className="info-container"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        onMouseEnter={(e) => e.stopPropagation()}
+        onMouseMove={(e) => e.stopPropagation()}
+      >
+        {/* Styled expects a .section-wrapper around sections */}
+        <div className="section-wrapper">
+          <motion.div
+            className="info-section"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            onMouseEnter={(e) => e.stopPropagation()}
+            onMouseMove={(e) => e.stopPropagation()}
+          >
+          <motion.h1
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            whileHover={{ scale: 1.05 }}
+          >
+            About Me
+          </motion.h1>
+          
+          <motion.div
+            className="intro-text"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            onMouseEnter={() => globalModalState.setElementHover('info-intro')}
+            onMouseLeave={() => globalModalState.setElementHover(null)}
+          >
+            <p>
+              안녕하세요! 저는 프론트엔드 개발자 강규민입니다.
+              사용자 중심의 웹 애플리케이션을 개발하는 것을 좋아하며,
+              새로운 기술을 배우고 적용하는 것에 열정을 가지고 있습니다.
+            </p>
+            <p>
+              React와 TypeScript를 주로 사용하며, 깔끔하고 유지보수하기 쉬운 코드를 작성하는 것을 중요하게 생각합니다.
+              현재 Next.js 프로젝트에 참여하며 백엔드와 데이터베이스에 대한 이해도도 쌓아가고 있습니다.
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="experiences-section"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.1 }}
+            onMouseEnter={() => globalModalState.setElementHover('info-experiences')}
+            onMouseLeave={() => globalModalState.setElementHover(null)}
+          >
+            <h2>What I Do</h2>
+            <div className="experiences-grid">
+              {experiences.map((exp) => (
+                <motion.div
+                  key={exp.title}
+                  className="experience-item"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 1.3 }}
+                  whileHover={{ scale: 1.05 }}
+                  onMouseEnter={(e) => e.stopPropagation()}
+                  onMouseMove={(e) => e.stopPropagation()}
+                >
+                  <div className="experience-icon">{exp.icon}</div>
+                  <h3>{exp.title}</h3>
+                  <p>{exp.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+          </motion.div>
+
+          <motion.div
+            className="img-section"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            onMouseEnter={(e) => e.stopPropagation()}
+            onMouseMove={(e) => e.stopPropagation()}
+          >
+            <motion.div
+              className="profile-container"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+            >
+              <img src={ProfileImg} alt="Profile" />
+              <NeonBorder />
+            </motion.div>
+          </motion.div>
         </div>
-        <div className="img-section">
-          <img src={ProfileImg}></img>
-        </div>
-      </div>
+      </motion.div>
     </Styled>
   );
 }
 
-export default FirstContents;
+export default Info;
