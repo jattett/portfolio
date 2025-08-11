@@ -1,65 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MdClose } from 'react-icons/md';
+import { FaGithub } from 'react-icons/fa';
+import { FiExternalLink } from 'react-icons/fi';
 import { Styled } from './Styled';
 import { globalModalState } from '../main';
+import projectsData from '../../data/projects.json';
+
+interface ProjectItem {
+  id: number;
+  title: string;
+  description: string;
+  mainimage?: string;
+  image?: string;
+  images?: string[];
+  subdescription?: string[];
+  features?: string[];
+  skill?: string[];
+  technologies?: string[];
+  githublink?: string;
+  link?: string;
+  playlink?: string;
+  demo?: string;
+}
 
 function Project() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
+  const [activeImageIndex, setActiveImageIndex] = useState<number>(0);
 
-  const projects = [
-    {
-      id: 1,
-      title: '포트폴리오 웹사이트',
-      description: 'React와 Framer Motion을 활용한 인터랙티브 포트폴리오',
-      image: '/assets/project/portfolio.png',
-      technologies: ['React', 'TypeScript', 'Framer Motion', 'Styled-Components'],
-      features: [
-        '풀페이지 스크롤 애니메이션',
-        '드래그 앤 드롭 인터랙션',
-        '반응형 디자인',
-        '성능 최적화'
-      ],
-      link: 'https://github.com/jattett/portfolio',
-      demo: 'https://portfolio-4vhc.vercel.app/'
-    },
-    {
-      id: 2,
-      title: 'AI 프로젝트',
-      description: '머신러닝을 활용한 데이터 분석 및 시각화 플랫폼',
-      image: '/assets/project/ai_project.png',
-      technologies: ['Python', 'TensorFlow', 'React', 'D3.js'],
-      features: [
-        '실시간 데이터 처리',
-        '인터랙티브 차트',
-        'AI 모델 통합',
-        '대시보드 시스템'
-      ],
-      link: 'https://github.com/jattett/ai-project',
-      demo: 'https://ai-project-demo.vercel.app/'
-    },
-    {
-      id: 3,
-      title: 'EchoMind',
-      description: '음성 인식 기반 메모 및 할일 관리 애플리케이션',
-      image: '/assets/project/echomind_1.png',
-      technologies: ['React Native', 'Speech Recognition', 'Firebase'],
-      features: [
-        '음성 명령 인식',
-        '실시간 동기화',
-        '오프라인 지원',
-        '크로스 플랫폼'
-      ],
-      link: 'https://github.com/jattett/echomind',
-      demo: 'https://echomind-app.vercel.app/'
-    }
-  ];
+  const projects = projectsData as ProjectItem[];
 
-  const openModal = (project: any) => {
+  const openModal = (project: ProjectItem) => {
     setSelectedProject(project);
     setIsModalOpen(true);
     globalModalState.openModal();
+    setActiveImageIndex(0);
   };
 
   const closeModal = () => {
@@ -110,7 +86,7 @@ function Project() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          {projects.map((project, index) => (
+          {projects.map((project: ProjectItem, index) => (
             <motion.div
               key={project.id}
               className="project-card"
@@ -123,7 +99,7 @@ function Project() {
               onMouseLeave={() => globalModalState.setElementHover(null)}
             >
               <div className="project-image">
-                <img src={project.image} alt={project.title} />
+                <img src={project.mainimage ?? project.image} alt={project.title} />
                 <div className="project-overlay">
                   <span>클릭하여 상세보기</span>
                 </div>
@@ -132,11 +108,11 @@ function Project() {
                 <h3>{project.title}</h3>
                 <p>{project.description}</p>
                 <div className="project-tech">
-                  {project.technologies.slice(0, 3).map((tech, techIndex) => (
+                  {(project.skill ?? project.technologies ?? []).slice(0, 3).map((tech: string, techIndex: number) => (
                     <span key={techIndex} className="tech-tag">{tech}</span>
                   ))}
-                  {project.technologies.length > 3 && (
-                    <span className="tech-tag">+{project.technologies.length - 3}</span>
+                  {(project.skill ?? project.technologies ?? []).length > 3 && (
+                    <span className="tech-tag">+{(project.skill ?? project.technologies ?? []).length - 3}</span>
                   )}
                 </div>
               </div>
@@ -176,51 +152,98 @@ function Project() {
                 </div>
 
                 <div className="modal-body">
+                  <div className="right-content">
                   <div className="project-image-large">
-                    <img src={selectedProject.image} alt={selectedProject.title} />
+                    {(() => {
+                      const images: string[] = Array.isArray(selectedProject.images) ? selectedProject.images : [];
+                      const mainSrc: string = images.length > 0
+                        ? images[Math.min(activeImageIndex, images.length - 1)]
+                        : (selectedProject.mainimage ?? selectedProject.image ?? "");
+                      return (
+                        <img
+                          src={mainSrc}
+                          alt={selectedProject.title}
+                          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                        />
+                      );
+                    })()}
                   </div>
-
                   <div className="project-details">
-                    <div className="technologies-section">
-                      <h3>사용 기술</h3>
-                      <div className="tech-list">
-                        {selectedProject.technologies.map((tech: string, index: number) => (
-                          <span key={index} className="tech-chip">{tech}</span>
-                        ))}
-                      </div>
-                    </div>
-
                     <div className="features-section">
-                      <h3>주요 기능</h3>
-                      <ul className="features-list">
-                        {selectedProject.features.map((feature: string, index: number) => (
-                          <li key={index}>{feature}</li>
+                      {Array.isArray(selectedProject.images) && selectedProject.images.length > 0 && (
+                        <div
+                          className="image-gallery"
+                          style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: 12, marginBottom: 16 }}
+                        >
+                          {selectedProject.images.map((src: string, idx: number) => {
+                            const isActive = idx === activeImageIndex;
+                            return (
+                              <button
+                                key={idx}
+                                type="button"
+                                onClick={() => setActiveImageIndex(idx)}
+                                style={{
+                                  padding: 0,
+                                  border: isActive ? '2px solid rgba(57, 255, 20, 0.9)' : '2px solid rgba(255,255,255,0.15)',
+                                  borderRadius: 10,
+                                  overflow: 'hidden',
+                                  background: 'transparent',
+                                  cursor: 'pointer',
+                                }}
+                              >
+                                <img
+                                  src={src}
+                                  alt={`${selectedProject.title}-${idx + 1}`}
+                                  style={{ width: '100%', height: 110, objectFit: 'cover', display: 'block' }}
+                                />
+                              </button>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                    </div>
+                  </div>
+                  <div className='left-content'>
+                  <div className="current-stack" style={{ alignSelf: 'start' }}>
+                    <h4 style={{ margin: '12px 0' }}>현재 사용 기술</h4>
+                    <div className="tech-list">
+                      {(selectedProject.skill ?? selectedProject.technologies ?? []).map((tech: string, index: number) => (
+                        <span key={index} className="tech-chip">{tech}</span>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <ul className="features-list">
+                        {(selectedProject.subdescription ?? selectedProject.features ?? []).map((line: string, index: number) => (
+                          <li key={index}>{line}</li>
                         ))}
-                      </ul>
-                    </div>
-
-                    <div className="project-links">
-                      {selectedProject.link && (
-                        <a 
-                          href={selectedProject.link} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="project-link"
-                        >
-                          GitHub
-                        </a>
-                      )}
-                      {selectedProject.demo && (
-                        <a 
-                          href={selectedProject.demo} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="project-link demo"
-                        >
-                          Live Demo
-                        </a>
-                      )}
-                    </div>
+                    </ul>
+                      <div className="project-links">
+                        {(selectedProject.githublink ?? selectedProject.link) && (
+                          <a 
+                            href={selectedProject.githublink ?? selectedProject.link} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="project-link github"
+                          >
+                            <FaGithub />
+                            GitHub
+                          </a>
+                        )}
+                        {(selectedProject.playlink ?? selectedProject.demo) && (
+                          <a 
+                            href={selectedProject.playlink ?? selectedProject.demo} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="project-link demo"
+                          >
+                            <FiExternalLink />
+                            Live Demo
+                          </a>
+                        )}
+                      </div>
+                  </div>
                   </div>
                 </div>
               </motion.div>

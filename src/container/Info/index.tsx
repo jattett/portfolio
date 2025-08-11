@@ -2,28 +2,23 @@ import { motion } from 'framer-motion';
 import { MdCode, MdPalette, MdWork } from 'react-icons/md';
 import { Styled, NeonBorder } from './Styled';
 import { globalModalState } from '../main';
+import infoData from '../../data/info.json';
 
 // Images under public should be referenced by absolute path
 const ProfileImg = '/assets/me.jpg';
 
 function Info() {
-  const experiences = [
-    {
-      icon: <MdCode />,
-      title: 'Frontend Development',
-      description: 'React, TypeScript, Styled-Components를 활용한 현대적인 웹 개발',
-    },
-    {
-      icon: <MdPalette />,
-      title: 'UI/UX Design',
-      description: '사용자 경험을 고려한 직관적이고 아름다운 인터페이스 설계',
-    },
-    {
-      icon: <MdWork />,
-      title: 'Problem Solving',
-      description: '복잡한 기술적 문제를 창의적이고 효율적으로 해결',
-    },
-  ];
+  const iconMap: Record<string, JSX.Element> = {
+    code: <MdCode />,
+    palette: <MdPalette />,
+    work: <MdWork />,
+  };
+
+  const experiences = infoData.experiences.map((exp) => ({
+    icon: iconMap[exp.icon] ?? <MdCode />,
+    title: exp.title,
+    description: exp.description,
+  }));
 
   return (
     <Styled>

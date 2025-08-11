@@ -1,0 +1,36 @@
+[
+  {
+    "id": "github",
+    "icon": "github",
+    "title": "GitHub",
+    "content": "https://github.com/jattett",
+    "link": "https://github.com/jattett",
+    "color": "#333"
+  },
+  {
+    "id": "email",
+    "icon": "email",
+    "title": "Email",
+    "content": "gnto2000@naver.com",
+    "link": "mailto:gnto2000@naver.com",
+    "color": "#EA4335"
+  },
+  {
+    "id": "phone",
+    "icon": "phone",
+    "title": "Phone",
+    "content": "(+82) 010-7422-8672",
+    "link": "tel:+8201074228672",
+    "color": "#25D366"
+  },
+  {
+    "id": "website",
+    "icon": "website",
+    "title": "Website",
+    "content": "https://portfolio-4vhc.vercel.app/",
+    "link": "https://portfolio-4vhc.vercel.app/",
+    "color": "#4285F4"
+  }
+]
+
+

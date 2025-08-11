@@ -311,7 +311,7 @@ const Styled = styled.div`
     border-radius: 25px;
     padding: 40px;
     max-width: 90vw;
-    max-height: 85vh;
+    max-height: 600px;
     width: 1000px;
     position: relative;
     overflow: hidden;
@@ -320,6 +320,7 @@ const Styled = styled.div`
       0 0 50px rgba(57, 255, 20, 0.2),
       inset 0 0 50px rgba(57, 255, 20, 0.05);
     cursor: default;
+    overflow-y: auto;
 
     &::before {
       content: '';
@@ -394,7 +395,19 @@ const Styled = styled.div`
     }
 
     .modal-body {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      .timeline-info {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
       .projects-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px 0;
         h4 {
           color: #39ff14;
           font-size: 1.3rem;
@@ -419,12 +432,6 @@ const Styled = styled.div`
             gap: 15px;
             align-items: flex-start;
             transition: all 0.3s ease;
-
-            &:hover {
-              background: rgba(57, 255, 20, 0.1);
-              border-color: rgba(57, 255, 20, 0.5);
-              transform: translateX(5px);
-            }
 
             .project-number {
               background: #39ff14;
@@ -476,15 +483,6 @@ const Styled = styled.div`
                   gap: 8px;
                   align-items: flex-start;
 
-                  .detail-bullet {
-                    width: 6px;
-                    height: 6px;
-                    background: #39ff14;
-                    border-radius: 50%;
-                    margin-top: 6px;
-                    flex-shrink: 0;
-                    box-shadow: 0 0 8px #39ff14;
-                  }
 
                   span {
                     color: rgba(255, 255, 255, 0.8);

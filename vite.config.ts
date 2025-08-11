@@ -21,7 +21,7 @@ export default defineConfig({
     include: ['react', 'react-dom', 'styled-components', 'framer-motion'],
   },
   server: {
-    port: 3000,
+    port: 3001,
     open: true,
   },
 });

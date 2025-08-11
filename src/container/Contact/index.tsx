@@ -1,27 +1,9 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaEnvelope, FaGithub, FaPhone, FaGlobe } from 'react-icons/fa';
-import {
-  DndContext,
-  closestCenter,
-  KeyboardSensor,
-  PointerSensor,
-  useSensor,
-  useSensors,
-  DragEndEvent,
-  DragStartEvent,
-  DragOverlay,
-} from '@dnd-kit/core';
-import {
-  arrayMove,
-  SortableContext,
-  sortableKeyboardCoordinates,
-  useSortable,
-  rectSortingStrategy,
-} from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
 import Styled from './Styled';
 import { globalModalState } from '../main';
+import contactData from '../../data/contact.json';
 
 interface ContactItem {
   id: string;
@@ -32,25 +14,51 @@ interface ContactItem {
   color: string;
 }
 
-function SortableContactItem({ item, isDragging }: { item: ContactItem; isDragging: boolean }) {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging: itemIsDragging,
-  } = useSortable({ 
-    id: item.id,
-    animateLayoutChanges: () => false,
-  });
+interface ContactItemJson {
+  id: string;
+  icon: string;
+  title: string;
+  content: string;
+  link: string;
+  color: string;
+}
 
-  const baseTransform = CSS.Transform.toString(transform) || '';
-  const style = {
-    transform: itemIsDragging ? `${baseTransform} rotate(5deg) scale(1.1)` : baseTransform,
-    transition: isDragging ? 'none' : transition,
-    zIndex: itemIsDragging ? 1000 : 1,
-  } as React.CSSProperties;
+const contactIconMap: Record<string, React.ReactNode> = {
+  github: <FaGithub />,
+  email: <FaEnvelope />,
+  phone: <FaPhone />,
+  website: <FaGlobe />,
+};
+
+function ContactItemCard({ item, isDragging }: { item: ContactItem; isDragging: boolean }) {
+  const [tilt, setTilt] = useState<{ rotateX: number; rotateY: number }>({ rotateX: 0, rotateY: 0 });
+  const [glowPos, setGlowPos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [ripplePos, setRipplePos] = useState<{ x: number; y: number } | null>(null);
+  const [rippleKey, setRippleKey] = useState<number>(0);
+
+  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    const rect = (e.currentTarget as HTMLDivElement).getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const px = x / rect.width;
+    const py = y / rect.height;
+    const rotateY = (px - 0.5) * 12;
+    const rotateX = -(py - 0.5) * 12;
+    setTilt({ rotateX, rotateY });
+    setGlowPos({ x, y });
+  }
+
+  function handleMouseLeave() {
+    setTilt({ rotateX: 0, rotateY: 0 });
+  }
+
+  function handleMouseDown(e: React.MouseEvent<HTMLDivElement>) {
+    const rect = (e.currentTarget as HTMLDivElement).getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    setRipplePos({ x, y });
+    setRippleKey(Date.now());
+  }
 
   const itemVariants = {
     initial: { 
@@ -89,19 +97,17 @@ function SortableContactItem({ item, isDragging }: { item: ContactItem; isDraggi
 
   return (
     <motion.div
-      ref={setNodeRef}
       variants={itemVariants}
       initial="initial"
-      animate={itemIsDragging ? "drag" : "animate"}
-      whileHover={itemIsDragging ? undefined : "hover"}
+      animate={isDragging ? "drag" : "animate"}
+      whileHover={isDragging ? undefined : "hover"}
       className="contact-item"
-      {...attributes}
-      {...listeners}
       style={{
-        ...style,
-        background: `linear-gradient(135deg, ${item.color}20, rgba(57, 255, 20, 0.8))`,
-        border: `2px solid ${item.color}40`,
-        opacity: itemIsDragging ? 0.9 : 1,
+        background: `linear-gradient(135deg, rgba(57, 255, 20, 0.12), rgba(57, 255, 20, 0.8))`,
+        border: `2px solid rgba(57, 255, 20, 0.25)`,
+        opacity: isDragging ? 0.9 : 1,
+        rotateX: tilt.rotateX,
+        rotateY: tilt.rotateY,
       }}
       layout
       transition={{
@@ -111,8 +117,10 @@ function SortableContactItem({ item, isDragging }: { item: ContactItem; isDraggi
         duration: 0.3
       }}
       onMouseEnter={() => globalModalState.setElementHover('contact-item')}
-      onMouseLeave={() => globalModalState.setElementHover(null)}
-      data-dragging={itemIsDragging ? true : undefined}
+      onMouseLeave={() => { globalModalState.setElementHover(null); handleMouseLeave(); }}
+      onMouseMove={handleMouseMove}
+      onMouseDown={handleMouseDown}
+      data-dragging={isDragging ? true : undefined}
     >
       <motion.div
         className="item-content"
@@ -170,81 +178,48 @@ function SortableContactItem({ item, isDragging }: { item: ContactItem; isDraggi
         whileHover={{ opacity: 1 }}
         transition={{ duration: 0.3 }}
         style={{
-          background: `radial-gradient(circle, ${item.color}40, transparent)`
+          pointerEvents: 'none',
+          background: `radial-gradient(160px circle at ${glowPos.x}px ${glowPos.y}px, rgba(57, 255, 20, 0.25), transparent)`
         }}
       />
+
+      {ripplePos && (
+        <motion.div
+          key={rippleKey}
+          style={{
+            position: 'absolute',
+            left: ripplePos.x,
+            top: ripplePos.y,
+            width: 12,
+            height: 12,
+            borderRadius: '50%',
+            background: `rgba(57, 255, 20, 0.4)`,
+            transform: 'translate(-50%, -50%)',
+            pointerEvents: 'none',
+            zIndex: 1,
+          }}
+          initial={{ scale: 0, opacity: 0.5 }}
+          animate={{ scale: 6, opacity: 0 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+        />
+      )}
     </motion.div>
   );
 }
 
 function Contact() {
-  const [contactItems, setContactItems] = useState<ContactItem[]>([
-    {
-      id: 'github',
-      icon: <FaGithub />,
-      title: 'GitHub',
-      content: 'https://github.com/jattett',
-      link: 'https://github.com/jattett',
-      color: '#333'
-    },
-    {
-      id: 'email',
-      icon: <FaEnvelope />,
-      title: 'Email',
-      content: 'gnto2000@naver.com',
-      link: 'mailto:gnto2000@naver.com',
-      color: '#EA4335'
-    },
-    {
-      id: 'phone',
-      icon: <FaPhone />,
-      title: 'Phone',
-      content: '(+82) 010-7422-8672',
-      link: 'tel:+8201074228672',
-      color: '#25D366'
-    },
-    {
-      id: 'website',
-      icon: <FaGlobe />,
-      title: 'Website',
-      content: 'https://portfolio-4vhc.vercel.app/',
-      link: 'https://portfolio-4vhc.vercel.app/',
-      color: '#4285F4'
-    }
-  ]);
-
-  const [activeId, setActiveId] = useState<string | null>(null);
-  const activeItem = contactItems.find((item) => item.id === activeId) || null;
-
-  const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: {
-        distance: 8,
-      },
-    }),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
+  const [contactItems] = useState<ContactItem[]>(() =>
+    (contactData as ContactItemJson[]).map((item) => ({
+      id: item.id,
+      icon: contactIconMap[item.icon] ?? null,
+      title: item.title,
+      content: item.content,
+      link: item.link,
+      color: item.color,
+    }))
   );
 
-  function handleDragStart(event: DragStartEvent) {
-    setActiveId(event.active.id as string);
-  }
-
-  function handleDragEnd(event: DragEndEvent) {
-    const { active, over } = event;
-
-    setActiveId(null);
-
-    if (active.id !== over?.id) {
-      setContactItems((items) => {
-        const oldIndex = items.findIndex((item) => item.id === active.id);
-        const newIndex = items.findIndex((item) => item.id === over?.id);
-
-        return arrayMove(items, oldIndex, newIndex);
-      });
-    }
-  }
+  // Drag & Drop 제거. 대체 효과로 틸트/글로우만 유지
 
   const containerVariants = {
     initial: { opacity: 0 },
@@ -297,72 +272,17 @@ function Contact() {
           initial="initial"
           animate="animate"
         >
-          <DndContext
-            sensors={sensors}
-            collisionDetection={closestCenter}
-            onDragStart={handleDragStart}
-            onDragEnd={handleDragEnd}
+          <motion.div 
+            className="reorder-group"
+            layout
+            transition={{ type: 'spring', stiffness: 300, damping: 30, duration: 0.3 }}
           >
-            <SortableContext
-              items={contactItems.map(item => item.id)}
-            strategy={rectSortingStrategy}
-            >
-              <motion.div 
-                className="reorder-group"
-                layout
-                transition={{
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 30,
-                  duration: 0.3
-                }}
-              >
-                {contactItems.map((item) => (
-                  <SortableContactItem 
-                    key={item.id} 
-                    item={item} 
-                    isDragging={activeId === item.id}
-                  />
-                ))}
-              </motion.div>
-            </SortableContext>
-
-            {/* Drag preview overlay to ensure the dragged item is visible */}
-            <DragOverlay style={{ zIndex: 2000 }}>
-              {activeItem ? (
-                <motion.div
-                  className="contact-item"
-                  initial={{ opacity: 1, scale: 1 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  style={{
-                    background: `linear-gradient(135deg, ${activeItem.color}20, rgba(57, 255, 20, 0.8))`,
-                    border: `2px solid ${activeItem.color}40`,
-                  }}
-                >
-                  <div className="item-content">
-                    <div className="item-icon">{activeItem.icon}</div>
-                    <h3 className="item-title">{activeItem.title}</h3>
-                    <div className="item-link">
-                      {activeItem.link ? (
-                        <a
-                          href={activeItem.link}
-                          target={activeItem.id === 'email' ? undefined : '_blank'}
-                          rel={activeItem.id === 'email' ? undefined : 'noopener noreferrer'}
-                          className="contact-link"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          {activeItem.content}
-                        </a>
-                      ) : (
-                        <span>{activeItem.content}</span>
-                      )}
-                    </div>
-                  </div>
-                  <div className="item-glow" />
-                </motion.div>
-              ) : null}
-            </DragOverlay>
-          </DndContext>
+            {contactItems.map((item) => (
+              <div key={item.id} style={{ listStyle: 'none' }}>
+                <ContactItemCard item={item} isDragging={false} />
+              </div>
+            ))}
+          </motion.div>
         </motion.div>
 
         {/* Interactive hint */}
@@ -379,7 +299,7 @@ function Contact() {
             }}
             transition={{ duration: 3, repeat: Infinity }}
           >
-            드래그하여 순서를 변경하고 클릭하여 연결하세요
+            클릭하여 연결하거나 마우스를 올려보세요
           </motion.p>
         </motion.div>
       </motion.div>

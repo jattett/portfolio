@@ -1,0 +1,129 @@
+[
+  {
+    "id": 1,
+    "year": "2024.04 ~ 재직중",
+    "title": "사원",
+    "company": "(주)클러쉬",
+    "description": "퍼블리싱 및 프론트엔드 개발",
+    "projects": [
+      {
+        "period": "2024.06 ~ 2024.08",
+        "name": "SK하이닉스 스마트 쿠키 숏폼",
+        "description": "퍼블리싱 및 프론트엔드 개발",
+        "skills": ["JavaScript", "React", "Styled-Components"],
+        "details": [
+          "웹·태블릿·모바일 퍼블리싱 전담",
+          "일관성 있는 미디어 뷰 구현",
+          "상태관리 기반 미디어 제어(재생·볼륨·PIP 모드)"
+        ]
+      },
+      {
+        "period": "2024.11 ~ 2024.12",
+        "name": "우리은행 데이터 포털",
+        "description": "프론트엔드 개발 (데이터 시각화·접근성 개선)",
+        "skills": ["JavaScript", "React", "Styled-Components", "Antd", "Chart.js", "Storybook"],
+        "details": [
+          "반응형 웹 퍼블리싱",
+          "테이블·리스트 커스텀 스타일링",
+          "Chart.js 기반 데이터 시각화",
+          "Storybook 도입으로 공통 컴포넌트화",
+          "접근성 개선 UI/UX 반영"
+        ]
+      },
+      {
+        "period": "2024.12",
+        "name": "Clush 워크플레이스 협업툴",
+        "description": "자사 서비스 개발",
+        "skills": ["JavaScript", "React", "Styled-Components", "Antd"],
+        "details": [
+          "웹·태블릿·모바일 퍼블리싱 운영",
+          "글로벌 스타일(약 2만줄) 모듈화 및 컴포넌트 단위 분리"
+        ]
+      },
+      {
+        "period": "2024.09 ~ 2025.06",
+        "name": "KB국민은행 협업 플랫폼 ‘워크비’",
+        "description": "퍼블리싱·프론트엔드 개발",
+        "skills": ["JavaScript", "React", "Styled-Components", "Antd"],
+        "details": [
+          "웹·태블릿·모바일 퍼블리싱 운영",
+          "글로벌 스타일(약 2만줄) 모듈화 및 재사용성 개선"
+        ]
+      },
+      {
+        "period": "2025.06 ~ 2025.08",
+        "name": "Clush 워크플레이스 협업툴 (mvp_portal, mvp-amsassorg)",
+        "description": "프론트엔드 개발",
+        "skills": ["JavaScript", "React", "Redux-Saga", "Axios"],
+        "details": [
+          "회원가입·조직등록 플로우(아이디 중복, OTP 발송·검증)",
+          "Redux-Saga 기반 상태관리 및 Axios 공통 래퍼 구축",
+          "SaaS 관리자 모듈 개발(조직 구조, 구성원 초대/관리, 설정)",
+          "공통 컴포넌트화(OrgSelector, FileUpload, Modal)",
+          "i18n 적용 및 마이크로프론트엔드 라우팅/스타일 네임스페이스"
+        ]
+      },
+      {
+        "period": "2025.08 ~ 현재",
+        "name": "UpStage Enterprise AI Work Space",
+        "description": "프론트엔드 설계·구축",
+        "skills": ["TypeScript", "React", "Next.js", "Zustand", "SWR", "Axios", "Tailwind CSS", "Shadcn"],
+        "details": [
+          "문서 정보추출 플로우 설계·구현(업로드→검증→분할→뷰잉→편집→추출)",
+          "파일 파이프라인 최적화 및 에러 검출",
+          "JSON 스키마 생성·검증·다운로드 기능 구현",
+          "문서 뷰어와 추출 결과 동기화, 페이지·좌표 하이라이트",
+          "자동 스키마 생성·재추출 플로우 구축",
+          "버전/배포 관리 기능 및 진행 단계 저장·복원 로직 구현",
+          "UI/기능 공통 컴포넌트화로 재사용성 확보"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "year": "2023.09 ~ 2024.04",
+    "title": "개발부 사원",
+    "company": "주식회사빅독(BIGDOG)",
+    "description": "웹 표준 준수 및 퍼블리싱 전반",
+    "projects": [
+      {
+        "name": "웹사이트 퍼블리싱 및 최적화",
+        "description": "아래 회사와 동일 조직",
+        "skills": ["HTML", "CSS", "JavaScript", "SEO"],
+        "details": [
+          "웹 표준 준수 및 웹사이트 전반 퍼블리싱 작업 수행",
+          "다양한 브라우저·장치에서 일관된 사용자 경험 제공",
+          "접근성(Accessibility) 및 SEO 개선 작업 진행",
+          "시멘틱 마크업 개선 및 유지보수",
+          "CSS Grid를 활용한 동적·반응형 레이아웃 구현",
+          "Google Lighthouse를 활용한 성능 최적화(페이지 로딩 속도, 인터랙션, 시각 안정성 개선)"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "year": "2023.03 ~ 2023.09",
+    "title": "개발부 사원",
+    "company": "주식회사 리비에라소프트",
+    "description": "웹 표준 준수 및 퍼블리싱 전반",
+    "projects": [
+      {
+        "name": "웹사이트 퍼블리싱 및 최적화",
+        "description": "7개월 근무",
+        "skills": ["HTML", "CSS", "JavaScript", "SEO"],
+        "details": [
+          "웹 표준 준수 및 웹사이트 전반 퍼블리싱 작업 수행",
+          "다양한 브라우저·장치에서 일관된 사용자 경험 제공",
+          "접근성(Accessibility) 및 SEO 개선 작업 진행",
+          "시멘틱 마크업 개선 및 유지보수",
+          "CSS Grid를 활용한 동적·반응형 레이아웃 구현",
+          "Google Lighthouse를 활용한 성능 최적화(페이지 로딩 속도, 인터랙션, 시각 안정성 개선)"
+        ]
+      }
+    ]
+  }
+]
+
+

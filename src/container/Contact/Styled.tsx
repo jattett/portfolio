@@ -62,7 +62,8 @@ const Styled = styled.div`
   }
 
   .reorder-group {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 2rem;
     align-items: center;
     justify-content: center;
@@ -70,6 +71,10 @@ const Styled = styled.div`
     padding: 2rem;
     width: 100%;
     min-height: 250px;
+    div {
+      display: flex;
+      justify-content: center;
+    }
   }
 
   .contact-item {

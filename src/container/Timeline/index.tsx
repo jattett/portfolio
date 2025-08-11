@@ -3,8 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { MdClose } from 'react-icons/md';
 import Styled from './Styled';
 import { globalModalState } from '../main';
+import timelineDataJson from '../../data/timeline.json';
 
 interface Project {
+  period?: string;
   name: string;
   description: string;
   skills: string[];
@@ -24,75 +26,7 @@ function Timeline() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState<TimelineItem | null>(null);
 
-  const timelineData = [
-    {
-      id: 1,
-      year: '2024',
-      title: '프론트엔드 개발자',
-      company: '스타트업',
-      description: 'React, TypeScript를 활용한 웹 애플리케이션 개발',
-      projects: [
-        {
-          name: '관리자 대시보드',
-          description: 'React와 TypeScript를 사용한 관리자 대시보드 개발',
-          skills: ['React', 'TypeScript', 'Styled-Components'],
-          details: [
-            '사용자 관리 및 권한 시스템 구현',
-            '실시간 데이터 시각화 차트 개발',
-            '반응형 디자인 적용'
-          ]
-        },
-        {
-          name: '모바일 웹 앱',
-          description: 'PWA 기술을 활용한 모바일 웹 애플리케이션',
-          skills: ['PWA', 'React', 'Service Worker'],
-          details: [
-            '오프라인 기능 구현',
-            '푸시 알림 시스템 개발',
-            '모바일 최적화 성능 개선'
-          ]
-        }
-      ]
-    },
-    {
-      id: 2,
-      year: '2023',
-      title: '웹 개발자',
-      company: 'IT 회사',
-      description: '다양한 웹 프로젝트 참여 및 기술 스택 확장',
-      projects: [
-        {
-          name: '이커머스 플랫폼',
-          description: 'Next.js를 활용한 대규모 이커머스 사이트 개발',
-          skills: ['Next.js', 'Node.js', 'MongoDB'],
-          details: [
-            'SSR/SSG 최적화로 성능 향상',
-            '결제 시스템 연동',
-            'SEO 최적화 구현'
-          ]
-        }
-      ]
-    },
-    {
-      id: 3,
-      year: '2022',
-      title: '신입 개발자',
-      company: '소프트웨어 회사',
-      description: '웹 개발 기초 학습 및 첫 프로젝트 참여',
-      projects: [
-        {
-          name: '포트폴리오 웹사이트',
-          description: '개인 포트폴리오 웹사이트 개발',
-          skills: ['HTML', 'CSS', 'JavaScript'],
-          details: [
-            '반응형 웹 디자인 구현',
-            '애니메이션 효과 추가',
-            '접근성 개선'
-          ]
-        }
-      ]
-    }
-  ];
+  const timelineData: TimelineItem[] = timelineDataJson as TimelineItem[];
 
   const openModal = (item: TimelineItem) => {
     setModalContent(item);
@@ -172,7 +106,6 @@ function Timeline() {
                     <p>{item.description}</p>
                   </div>
                 </div>
-                <span className="click-hint">클릭하여 상세 정보를 확인하세요</span>
               </motion.div>
             ))}
           </motion.div>
@@ -216,12 +149,19 @@ function Timeline() {
                 <div className="modal-body">
                   <h3>주요 프로젝트</h3>
                   <div className="projects-list">
-                                         {modalContent.projects.map((project: Project, index: number) => (
+                    {modalContent.projects.map((project: Project, index: number) => (
                       <div key={index} className="project-items">
                         <div className="project-item">
                           <div className="project-number">{index + 1}</div>
                           <div className="project-text">
-                            <h4>{project.name}</h4>
+                            <h4>
+                              {project.name}
+                              {project.period ? (
+                                <span className="project-period" style={{ marginLeft: 8, fontSize: '0.9rem', opacity: 0.8 }}>
+                                  {project.period}
+                                </span>
+                              ) : null}
+                            </h4>
                             <p>{project.description}</p>
                             <div className="project-skills">
                               {project.skills.map((skill: string, skillIndex: number) => (
