@@ -46,17 +46,17 @@ function Project() {
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
+      if (e.key === "Escape") {
         closeModal();
       }
     };
 
     if (isModalOpen) {
-      document.addEventListener('keydown', handleEsc);
+      document.addEventListener("keydown", handleEsc);
     }
 
     return () => {
-      document.removeEventListener('keydown', handleEsc);
+      document.removeEventListener("keydown", handleEsc);
     };
   }, [isModalOpen]);
 
@@ -67,7 +67,7 @@ function Project() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        onMouseEnter={() => globalModalState.setElementHover('project')}
+        onMouseEnter={() => globalModalState.setElementHover("project")}
         onMouseLeave={() => globalModalState.setElementHover(null)}
       >
         <motion.div
@@ -95,7 +95,9 @@ function Project() {
               transition={{ duration: 0.6, delay: 0.6 + index * 0.2 }}
               whileHover={{ scale: 1.05, y: -10 }}
               onClick={() => openModal(project)}
-              onMouseEnter={() => globalModalState.setElementHover('project-card')}
+              onMouseEnter={() =>
+                globalModalState.setElementHover("project-card")
+              }
               onMouseLeave={() => globalModalState.setElementHover(null)}
             >
               <div className="project-image">
@@ -113,6 +115,7 @@ function Project() {
                   ))}
                   {(project.skill ?? project.technologies ?? []).length > 3 && (
                     <span className="tech-tag">+{(project.skill ?? project.technologies ?? []).length - 3}</span>
+                  )}
                   )}
                 </div>
               </div>
@@ -139,7 +142,9 @@ function Project() {
                 transition={{ type: "spring", damping: 25, stiffness: 300 }}
                 onClick={(e) => e.stopPropagation()}
                 style={{ zIndex: 10000 }}
-                onMouseEnter={() => globalModalState.setElementHover('modal-content')}
+                onMouseEnter={() =>
+                  globalModalState.setElementHover("modal-content")
+                }
                 onMouseLeave={() => globalModalState.setElementHover(null)}
               >
                 <button className="modal-close" onClick={closeModal}>
@@ -148,13 +153,16 @@ function Project() {
 
                 <div className="modal-header">
                   <h2>{selectedProject.title}</h2>
-                  <p className="modal-description">{selectedProject.description}</p>
+                  <p className="modal-description">
+                    {selectedProject.description}
+                  </p>
                 </div>
 
                 <div className="modal-body">
                   <div className="right-content">
                   <div className="project-image-large">
                     {(() => {
+                      if (!selectedProject) return null;
                       const images: string[] = Array.isArray(selectedProject.images) ? selectedProject.images : [];
                       const mainSrc: string = images.length > 0
                         ? images[Math.min(activeImageIndex, images.length - 1)]
@@ -169,81 +177,99 @@ function Project() {
                     })()}
                   </div>
                   <div className="project-details">
-                    <div className="features-section">
-                      {Array.isArray(selectedProject.images) && selectedProject.images.length > 0 && (
-                        <div
-                          className="image-gallery"
-                          style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: 12, marginBottom: 16 }}
-                        >
-                          {selectedProject.images.map((src: string, idx: number) => {
-                            const isActive = idx === activeImageIndex;
-                            return (
-                              <button
-                                key={idx}
-                                type="button"
-                                onClick={() => setActiveImageIndex(idx)}
+                    {/* Image Gallery Thumbnails */}
+                    {Array.isArray(selectedProject.images) && selectedProject.images.length > 0 && (
+                      <div
+                        className="image-gallery"
+                        style={{
+                          display: 'grid',
+                          gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))',
+                          gap: 12,
+                          marginBottom: 16,
+                        }}
+                      >
+                        {selectedProject.images.map((src: string, idx: number) => {
+                          const isActive = idx === activeImageIndex;
+                          return (
+                            <button
+                              key={idx}
+                              type="button"
+                              onClick={() => setActiveImageIndex(idx)}
+                              style={{
+                                padding: 0,
+                                border: isActive
+                                  ? '2px solid rgba(57, 255, 20, 0.9)'
+                                  : '2px solid rgba(255,255,255,0.15)',
+                                borderRadius: 10,
+                                overflow: 'hidden',
+                                background: 'transparent',
+                                cursor: 'pointer',
+                              }}
+                            >
+                              <img
+                                src={src}
+                                alt={`${selectedProject.title}-${idx + 1}`}
                                 style={{
-                                  padding: 0,
-                                  border: isActive ? '2px solid rgba(57, 255, 20, 0.9)' : '2px solid rgba(255,255,255,0.15)',
-                                  borderRadius: 10,
-                                  overflow: 'hidden',
-                                  background: 'transparent',
-                                  cursor: 'pointer',
+                                  width: '100%',
+                                  height: 110,
+                                  objectFit: 'cover',
+                                  display: 'block',
                                 }}
-                              >
-                                <img
-                                  src={src}
-                                  alt={`${selectedProject.title}-${idx + 1}`}
-                                  style={{ width: '100%', height: 110, objectFit: 'cover', display: 'block' }}
-                                />
-                              </button>
-                            );
-                          })}
-                        </div>
-                      )}
-                    </div>
-                    </div>
-                  </div>
-                  <div className='left-content'>
-                  <div className="current-stack" style={{ alignSelf: 'start' }}>
-                    <h4 style={{ margin: '12px 0' }}>현재 사용 기술</h4>
-                    <div className="tech-list">
-                      {(selectedProject.skill ?? selectedProject.technologies ?? []).map((tech: string, index: number) => (
-                        <span key={index} className="tech-chip">{tech}</span>
-                      ))}
-                    </div>
-                  </div>
-                  <div>
-                    <ul className="features-list">
-                        {(selectedProject.subdescription ?? selectedProject.features ?? []).map((line: string, index: number) => (
-                          <li key={index}>{line}</li>
-                        ))}
-                    </ul>
-                      <div className="project-links">
-                        {(selectedProject.githublink ?? selectedProject.link) && (
-                          <a 
-                            href={selectedProject.githublink ?? selectedProject.link} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="project-link github"
-                          >
-                            <FaGithub />
-                            GitHub
-                          </a>
-                        )}
-                        {(selectedProject.playlink ?? selectedProject.demo) && (
-                          <a 
-                            href={selectedProject.playlink ?? selectedProject.demo} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="project-link demo"
-                          >
-                            <FiExternalLink />
-                            Live Demo
-                          </a>
+                              />
+                            </button>
+                          );
+                        })}
+                      </div>
+                    )}
+
+                    <div className="technologies-section">
+                      <h3>사용 기술</h3>
+                      <div className="tech-list">
+                        {(selectedProject.skill ?? selectedProject.technologies ?? []).map(
+                          (tech: string, index: number) => (
+                            <span key={index} className="tech-chip">
+                              {tech}
+                            </span>
+                          )
                         )}
                       </div>
-                  </div>
+                    </div>
+
+                    <div className="features-section">
+                      <h3>주요 기능</h3>
+                      <ul className="features-list">
+                        {(selectedProject.subdescription ?? selectedProject.features ?? []).map(
+                          (line: string, index: number) => (
+                            <li key={index}>{line}</li>
+                          )
+                        )}
+                      </ul>
+                    </div>
+
+                    <div className="project-links">
+                      {(selectedProject.githublink ?? selectedProject.link) && (
+                        <a
+                          href={selectedProject.githublink ?? selectedProject.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="project-link github"
+                        >
+                          <FaGithub />
+                          GitHub
+                        </a>
+                      )}
+                      {(selectedProject.playlink ?? selectedProject.demo) && (
+                        <a
+                          href={selectedProject.playlink ?? selectedProject.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="project-link demo"
+                        >
+                          <FiExternalLink />
+                          Live Demo
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
               </motion.div>
