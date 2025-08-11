@@ -116,7 +116,6 @@ function Project() {
                   {(project.skill ?? project.technologies ?? []).length > 3 && (
                     <span className="tech-tag">+{(project.skill ?? project.technologies ?? []).length - 3}</span>
                   )}
-                  )}
                 </div>
               </div>
             </motion.div>
@@ -271,6 +270,7 @@ function Project() {
                       )}
                     </div>
                   </div>
+                </div>
                 </div>
               </motion.div>
             </motion.div>
