@@ -262,7 +262,6 @@ function Contact() {
             transition={{ duration: 0.8, delay: 0.7 }}
             whileHover={{ scale: 1.02 }}
           >
-            드래그하여 순서를 변경하세요
           </motion.p>
         </motion.div>
 

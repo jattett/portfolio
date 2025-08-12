@@ -158,7 +158,7 @@ function Project() {
                 </div>
 
                 <div className="modal-body">
-                  <div className="right-content">
+                  <div className="left-content">
                   <div className="project-image-large">
                     {(() => {
                       if (!selectedProject) return null;
@@ -219,8 +219,11 @@ function Project() {
                           );
                         })}
                       </div>
-                    )}
-
+                    )}  
+                  </div>
+                  
+                </div>
+                <div className="right-content">
                     <div className="technologies-section">
                       <h3>사용 기술</h3>
                       <div className="tech-list">
@@ -269,8 +272,7 @@ function Project() {
                         </a>
                       )}
                     </div>
-                  </div>
-                </div>
+                    </div>
                 </div>
               </motion.div>
             </motion.div>
