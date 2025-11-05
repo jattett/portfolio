@@ -17,5 +17,18 @@
   .text-balance {
     text-wrap: balance;
   }
+  
+  .text-glow {
+    animation: textGlow 3s ease-in-out infinite;
+  }
+  
+  @keyframes textGlow {
+    0%, 100% {
+      text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+    }
+    50% {
+      text-shadow: 0 0 40px rgba(59, 130, 246, 0.5);
+    }
+  }
 }
 

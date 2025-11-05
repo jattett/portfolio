@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { MdClose } from 'react-icons/md'
 import { FaGithub } from 'react-icons/fa'
 import { FiExternalLink } from 'react-icons/fi'
@@ -31,6 +31,8 @@ export function ProjectSection() {
     null
   )
   const [activeImageIndex, setActiveImageIndex] = useState<number>(0)
+  const [isImageViewerOpen, setIsImageViewerOpen] = useState(false)
+  const [viewerImageSrc, setViewerImageSrc] = useState<string>('')
 
   const projects = projectsData as ProjectItem[]
 
@@ -44,6 +46,33 @@ export function ProjectSection() {
     setIsModalOpen(false)
     setSelectedProject(null)
   }
+
+  const openImageViewer = (imageSrc: string) => {
+    setViewerImageSrc(imageSrc)
+    setIsImageViewerOpen(true)
+  }
+
+  const closeImageViewer = () => {
+    setIsImageViewerOpen(false)
+    setViewerImageSrc('')
+  }
+
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        if (isImageViewerOpen) {
+          closeImageViewer()
+        } else if (isModalOpen) {
+          closeModal()
+        }
+      }
+    }
+
+    document.addEventListener('keydown', handleEsc)
+    return () => {
+      document.removeEventListener('keydown', handleEsc)
+    }
+  }, [isImageViewerOpen, isModalOpen])
 
   return (
     <section id="projects" className="py-20 px-4 bg-gradient-to-b from-blue-50 to-indigo-50">
@@ -139,21 +168,41 @@ export function ProjectSection() {
                   </h2>
                   <p className="text-gray-600 mb-6">{selectedProject.description}</p>
 
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="flex flex-col gap-6">
                     <div>
-                      <div className="relative h-64 rounded-xl overflow-hidden mb-4 bg-gradient-to-br from-primary-100 to-accent-100">
+                      <div 
+                        className="relative rounded-xl overflow-hidden mb-4 bg-gradient-to-br from-primary-100 to-accent-100 cursor-pointer group"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          const images: string[] = Array.isArray(selectedProject.images) ? selectedProject.images : []
+                          const mainSrc: string = images.length > 0
+                            ? images[Math.min(activeImageIndex, images.length - 1)]
+                            : (selectedProject.mainimage ?? selectedProject.image ?? "")
+                          if (mainSrc) {
+                            openImageViewer(mainSrc)
+                          }
+                        }}
+                      >
                         {(() => {
                           const images: string[] = Array.isArray(selectedProject.images) ? selectedProject.images : []
                           const mainSrc: string = images.length > 0
                             ? images[Math.min(activeImageIndex, images.length - 1)]
                             : (selectedProject.mainimage ?? selectedProject.image ?? "")
                           return (
-                            <Image
-                              src={mainSrc}
-                              alt={selectedProject.title}
-                              fill
-                              className="object-cover"
-                            />
+                            <div className="relative w-full" style={{ height: '500px' }}>
+                              <Image
+                                src={mainSrc}
+                                alt={selectedProject.title}
+                                fill
+                                className="object-contain"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 800px"
+                              />
+                              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                                <span className="opacity-0 group-hover:opacity-100 text-white text-sm font-medium bg-black/50 px-4 py-2 rounded-lg transition-opacity">
+                                  클릭하여 크게 보기
+                                </span>
+                              </div>
+                            </div>
                           )
                         })()}
                       </div>
@@ -164,8 +213,15 @@ export function ProjectSection() {
                             <button
                               key={idx}
                               type="button"
-                              onClick={() => setActiveImageIndex(idx)}
-                              className={`relative h-20 rounded-lg overflow-hidden border-2 transition-all ${
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                setActiveImageIndex(idx)
+                              }}
+                              onDoubleClick={(e) => {
+                                e.stopPropagation()
+                                openImageViewer(src)
+                              }}
+                              className={`relative h-20 rounded-lg overflow-hidden border-2 transition-all cursor-pointer group ${
                                 idx === activeImageIndex
                                   ? 'border-primary-500'
                                   : 'border-gray-200'
@@ -177,6 +233,7 @@ export function ProjectSection() {
                                 fill
                                 className="object-cover"
                               />
+                              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />
                             </button>
                           ))}
                         </div>
@@ -245,6 +302,43 @@ export function ProjectSection() {
                     </div>
                   </div>
                 </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Image Viewer Modal */}
+      <AnimatePresence>
+        {isImageViewerOpen && viewerImageSrc && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/90 backdrop-blur-sm z-[60] flex items-center justify-center p-4"
+            onClick={closeImageViewer}
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              className="relative max-w-[90vw] max-h-[90vh]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={closeImageViewer}
+                className="absolute -top-12 right-0 p-2 bg-white/20 hover:bg-white/30 rounded-full transition-colors text-white z-10"
+              >
+                <MdClose className="text-2xl" />
+              </button>
+              <div className="relative w-full" style={{ width: '90vw', height: '90vh', maxWidth: '1200px' }}>
+                <Image
+                  src={viewerImageSrc}
+                  alt="프로젝트 이미지"
+                  fill
+                  className="object-contain"
+                  sizes="90vw"
+                />
               </div>
             </motion.div>
           </motion.div>
