@@ -14,6 +14,15 @@ interface ContactItemJson {
   color: string
 }
 
+interface ContactItem {
+  id: string
+  icon: React.ReactNode
+  title: string
+  content: string
+  link: string
+  color: string
+}
+
 const contactIconMap: Record<string, React.ReactNode> = {
   github: <FaGithub />,
   email: <FaEnvelope />,
@@ -22,7 +31,7 @@ const contactIconMap: Record<string, React.ReactNode> = {
 }
 
 export function ContactSection() {
-  const contactItems = (contactData as ContactItemJson[]).map((item) => ({
+  const contactItems: ContactItem[] = (contactData as ContactItemJson[]).map((item) => ({
     ...item,
     icon: contactIconMap[item.icon] ?? null,
   }))
@@ -59,7 +68,7 @@ function ContactCard({
   item,
   index,
 }: {
-  item: ContactItemJson & { icon: React.ReactNode }
+  item: ContactItem
   index: number
 }) {
   const [hovered, setHovered] = useState(false)
