@@ -213,15 +213,26 @@ export function TimelineSection() {
                               ))}
                             </div>
                             <ul className="space-y-1">
-                              {project.details.map((detail: string, detailIndex: number) => (
-                                <li
-                                  key={detailIndex}
-                                  className="flex items-start text-gray-600 text-sm"
-                                >
-                                  <span className="text-primary-500 mr-2">•</span>
-                                  <span>{detail}</span>
-                                </li>
-                              ))}
+                              {project.details.map((detail: string, detailIndex: number) => {
+                                const isBold = detail.startsWith('***')
+                                const displayText = isBold ? detail.replace(/^\*\*\*\s*/, '') : detail
+                                
+                                if (!detail.trim()) {
+                                  return <li key={detailIndex} className="h-2" />
+                                }
+                                
+                                return (
+                                  <li
+                                    key={detailIndex}
+                                    className={`flex items-start text-gray-600 text-sm ${isBold ? 'mt-3 mb-1' : ''}`}
+                                  >
+                                    {!isBold && <span className="text-primary-500 mr-2">•</span>}
+                                    <span className={isBold ? 'font-bold text-gray-800 text-base' : ''}>
+                                      {displayText}
+                                    </span>
+                                  </li>
+                                )
+                              })}
                             </ul>
                           </div>
                         </div>
